@@ -1,37 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GatherUp Wellness Website
+
+Marketing website for GatherUp Wellness — wellness programming for commercial and residential properties.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **Animation:** Framer Motion
+- **Icons:** Lucide React, React Icons
+- **Deployment:** Vercel
+- **Integrations:** Google Sheets API (lead capture)
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home — hero, value props, testimonials, logos |
+| `/about-us` | Founder bio, mission, 5D approach |
+| `/our-commercial-solutions` | Commercial property offerings |
+| `/our-residential-solutions` | Residential property offerings |
+| `/why-it-matters` | Business case for tenant wellness |
+| `/playbook` | Tenant Engagement Playbook — lead capture + PDF download |
+
+## API Routes
+
+| Route | Method | Description |
+|-------|--------|-------------|
+| `/api/playbook-download` | POST | Saves lead data to Google Sheets, issues download token. Rate limiting (5 req/15min per IP), email dedup, server-side validation. |
+| `/api/playbook-download` | GET | Streams PDF from Google Drive (private). Requires valid download token from form submission. |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in the values:
 
-## Learn More
+```bash
+cp .env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create a Google Cloud project and enable **Google Sheets API** + **Google Drive API**
+2. Create a service account and download the JSON key
+3. Share your Google Sheet with the service account email (Editor access)
+4. Create a folder in Google Drive, share with service account email (Viewer access)
+5. Upload the Playbook PDF into that folder
+6. Copy `.env.example` to `.env.local` and fill in the values
+7. Add the same variables to Vercel: **Project Settings > Environment Variables**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Variables
 
-## Deploy on Vercel
+```bash
+# Google Service Account (from JSON key file)
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@your-project.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYOUR_KEY_HERE\n-----END PRIVATE KEY-----\n"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Google Sheets (lead capture)
+GOOGLE_SHEET_ID=your_sheet_id_from_url
+GOOGLE_SHEET_TAB_NAME=Sheet1
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-Deploy.
+# Google Drive (playbook PDF folder - private, shared with service account)
+# Create a folder, put your PDF in it. Get folder ID from the URL:
+# https://drive.google.com/drive/folders/FOLDER_ID
+# To update the PDF: just delete the old one and upload a new one in the same folder.
+GOOGLE_DRIVE_FOLDER_ID=your_drive_folder_id
+```
+
+| Variable | Source | Description |
+|----------|--------|-------------|
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | JSON key file → `client_email` | Service account email |
+| `GOOGLE_PRIVATE_KEY` | JSON key file → `private_key` | Private key (include BEGIN/END markers) |
+| `GOOGLE_SHEET_ID` | Sheet URL → `spreadsheets/d/SHEET_ID/edit` | Google Sheet for lead capture |
+| `GOOGLE_SHEET_TAB_NAME` | Sheet tab name | Default: `Sheet1` |
+| `GOOGLE_DRIVE_FOLDER_ID` | Folder URL → `drive/folders/FOLDER_ID` | Folder containing the Playbook PDF |
+
+## Google Sheet Setup
+
+The Playbook download form writes leads to a Google Sheet with these columns:
+
+| A | B | C | D | E | F | G |
+|---|---|---|---|---|---|---|
+| Full Name | Email | Property Name | Location | Consent | Timestamp | Source |
+
+Add these headers to row 1 of your Google Sheet.
+
+## Deployment
+
+Deployed via Vercel with GitHub integration. Environment variables must be configured in Vercel project settings.

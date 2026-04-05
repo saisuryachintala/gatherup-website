@@ -221,6 +221,19 @@ export const Header: React.FC = () => {
                             >
                                 About Us
                             </Link>
+                            <Link
+                                href="/playbook"
+                                className={`transition-all duration-500 ease-in-out ${isActive('/playbook')
+                                    ? 'text-[#a6ff48] font-bold'
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.05rem',
+                                    transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                            >
+                                Playbook
+                            </Link>
                         </nav>
 
                         {/* Mobile Menu Button */}
@@ -371,6 +384,21 @@ export const Header: React.FC = () => {
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 About Us
+                            </Link>
+                            <Link
+                                href="/playbook"
+                                className={`py-2 ${isActive('/playbook')
+                                    ? 'text-[#a6ff48] '
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.125rem',
+                                    fontWeight: isActive('/playbook') ? '600' : '400',
+                                    transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Playbook
                             </Link>
                             <BookDemoButton
                                 className="justify-center mt-2"

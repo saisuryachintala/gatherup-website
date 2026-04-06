@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Readable } from 'stream';
 
-// Simple in-memory rate limiter (per IP, resets on deploy)
+// Simple in-memory rate limiter (per IP, best-effort on serverless)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
@@ -24,10 +24,6 @@ function validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// Tracks emails that have successfully submitted the form (allows download)
-const downloadTokens = new Map<string, number>();
-const DOWNLOAD_TOKEN_TTL_MS = 10 * 60 * 1000; // 10 minutes
-
 function getAuthClient() {
     const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
     const key = process.env.GOOGLE_PRIVATE_KEY;
@@ -46,7 +42,27 @@ function getAuthClient() {
     });
 }
 
-// POST: Save lead to Google Sheets, issue download token
+// Helper to convert Node.js Readable to Web ReadableStream
+function nodeReadableToWebStream(nodeStream: Readable): ReadableStream<Uint8Array> {
+    return new ReadableStream({
+        start(controller) {
+            nodeStream.on('data', (chunk: Buffer) => {
+                controller.enqueue(new Uint8Array(chunk));
+            });
+            nodeStream.on('end', () => {
+                controller.close();
+            });
+            nodeStream.on('error', (err) => {
+                controller.error(err);
+            });
+        },
+        cancel() {
+            nodeStream.destroy();
+        },
+    });
+}
+
+// POST: Save lead to Google Sheets, then stream the PDF back
 export async function POST(request: NextRequest) {
     try {
         const ip = request.headers.get('x-forwarded-for') || 'unknown';
@@ -89,8 +105,9 @@ export async function POST(request: NextRequest) {
         }
 
         const sheetId = process.env.GOOGLE_SHEET_ID;
-        if (!sheetId) {
-            throw new Error('Missing Google Sheets configuration');
+        const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+        if (!sheetId || !folderId) {
+            throw new Error('Missing Google configuration');
         }
 
         const auth = getAuthClient();
@@ -119,8 +136,6 @@ export async function POST(request: NextRequest) {
             'Playbook Landing Page',
         ];
 
-        let status: 'created' | 'updated';
-
         if (duplicateRowIndex > 0) {
             const rowNumber = duplicateRowIndex + 1;
             await sheets.spreadsheets.values.update({
@@ -129,7 +144,6 @@ export async function POST(request: NextRequest) {
                 valueInputOption: 'USER_ENTERED',
                 requestBody: { values: [rowData] },
             });
-            status = 'updated';
         } else {
             await sheets.spreadsheets.values.append({
                 spreadsheetId: sheetId,
@@ -138,78 +152,11 @@ export async function POST(request: NextRequest) {
                 insertDataOption: 'INSERT_ROWS',
                 requestBody: { values: [rowData] },
             });
-            status = 'created';
         }
 
-        // Issue a time-limited download token tied to this IP
-        downloadTokens.set(ip, Date.now() + DOWNLOAD_TOKEN_TTL_MS);
-
-        return NextResponse.json({
-            success: true,
-            status,
-            downloadUrl: '/api/playbook-download',
-        });
-    } catch (error) {
-        console.error('Playbook download API error:', error);
-
-        const message =
-            error instanceof Error ? error.message : 'An unexpected error occurred';
-
-        const isConfigError = message.includes('Missing Google');
-        return NextResponse.json(
-            {
-                error: isConfigError
-                    ? 'Service temporarily unavailable. Please try again later.'
-                    : 'Failed to process your request. Please try again.',
-            },
-            { status: isConfigError ? 503 : 500 }
-        );
-    }
-}
-
-// Helper to convert Node.js Readable to Web ReadableStream
-function nodeReadableToWebStream(nodeStream: Readable): ReadableStream<Uint8Array> {
-    return new ReadableStream({
-        start(controller) {
-            nodeStream.on('data', (chunk: Buffer) => {
-                controller.enqueue(new Uint8Array(chunk));
-            });
-            nodeStream.on('end', () => {
-                controller.close();
-            });
-            nodeStream.on('error', (err) => {
-                controller.error(err);
-            });
-        },
-        cancel() {
-            nodeStream.destroy();
-        },
-    });
-}
-
-// GET: Stream PDF from Google Drive (only if user has a valid download token)
-export async function GET(request: NextRequest) {
-    try {
-        const ip = request.headers.get('x-forwarded-for') || 'unknown';
-
-        // Verify download token
-        const tokenExpiry = downloadTokens.get(ip);
-        if (!tokenExpiry || Date.now() > tokenExpiry) {
-            return NextResponse.json(
-                { error: 'Please submit the form first to download the playbook.' },
-                { status: 403 }
-            );
-        }
-
-        const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
-        if (!folderId) {
-            throw new Error('Missing Google Drive configuration');
-        }
-
-        const auth = getAuthClient();
+        // Lead saved — now stream the PDF from Google Drive
         const drive = google.drive({ version: 'v3', auth });
 
-        // Find the first PDF in the folder
         const fileList = await drive.files.list({
             q: `'${folderId}' in parents and mimeType='application/pdf' and trashed=false`,
             fields: 'files(id, name)',
@@ -225,13 +172,12 @@ export async function GET(request: NextRequest) {
         const file = files[0];
         const fileName = file.name || 'GatherUp-Playbook.pdf';
 
-        // Stream the file
-        const response = await drive.files.get(
+        const driveResponse = await drive.files.get(
             { fileId: file.id!, alt: 'media' },
             { responseType: 'stream' }
         );
 
-        const stream = nodeReadableToWebStream(response.data as Readable);
+        const stream = nodeReadableToWebStream(driveResponse.data as Readable);
 
         return new Response(stream, {
             headers: {
@@ -241,10 +187,19 @@ export async function GET(request: NextRequest) {
             },
         });
     } catch (error) {
-        console.error('Playbook file download error:', error);
+        console.error('Playbook download API error:', error);
+
+        const message =
+            error instanceof Error ? error.message : 'An unexpected error occurred';
+
+        const isConfigError = message.includes('Missing Google');
         return NextResponse.json(
-            { error: 'Failed to download the playbook. Please try again.' },
-            { status: 500 }
+            {
+                error: isConfigError
+                    ? 'Service temporarily unavailable. Please try again later.'
+                    : 'Failed to process your request. Please try again.',
+            },
+            { status: isConfigError ? 503 : 500 }
         );
     }
 }

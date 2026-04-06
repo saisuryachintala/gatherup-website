@@ -29,91 +29,95 @@ export const DownloadSection: React.FC = () => {
             consent,
         };
 
+        // Open a new tab immediately (while still in user gesture context)
+        // so mobile browsers don't block it as a popup
+        const newTab = window.open('about:blank', '_blank');
+
+        // Show a branded loading state so the user doesn't see a blank tab
+        if (newTab) {
+            const doc = newTab.document;
+            const html = doc.documentElement;
+            html.lang = 'en';
+
+            const head = doc.head;
+            const title = doc.createElement('title');
+            title.textContent = 'GatherUp Playbook';
+            head.appendChild(title);
+
+            const fontLink = doc.createElement('link');
+            fontLink.rel = 'stylesheet';
+            fontLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
+            head.appendChild(fontLink);
+
+            const style = doc.createElement('style');
+            style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+            head.appendChild(style);
+
+            const body = doc.body;
+            body.style.cssText = 'margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#053d3d;font-family:Montserrat,Arial,Helvetica,sans-serif;color:white;text-align:center;';
+
+            const wrapper = doc.createElement('div');
+
+            const spinnerDiv = doc.createElement('div');
+            spinnerDiv.style.marginBottom = '24px';
+            const svg = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '48');
+            svg.setAttribute('height', '48');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', '#a6ff48');
+            svg.setAttribute('stroke-width', '2');
+            svg.style.animation = 'spin 1s linear infinite';
+            const path = doc.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M12 2a10 10 0 0 1 10 10');
+            path.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(path);
+            spinnerDiv.appendChild(svg);
+            wrapper.appendChild(spinnerDiv);
+
+            const heading = doc.createElement('p');
+            heading.style.cssText = 'font-size:20px;font-weight:700;color:#a6ff48;margin:0 0 8px;font-family:Montserrat,Arial,Helvetica,sans-serif;';
+            heading.textContent = 'Preparing your playbook...';
+            wrapper.appendChild(heading);
+
+            const subtitle = doc.createElement('p');
+            subtitle.style.cssText = 'font-size:14px;color:#bce8e7;margin:0;font-family:Montserrat,Arial,Helvetica,sans-serif;line-height:1.5;';
+            subtitle.textContent = 'This will only take a moment.';
+            wrapper.appendChild(subtitle);
+
+            body.appendChild(wrapper);
+        }
+
         try {
+            // Single request: saves lead to Sheets, then streams the PDF back
             const response = await fetch('/api/playbook-download', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             });
 
-            const data = await response.json();
-
             if (!response.ok) {
+                // Error responses are JSON, PDF responses are binary
+                const data = await response.json();
                 throw new Error(data.error || 'Something went wrong.');
             }
 
-            // Open a new tab immediately (while still in user gesture context)
-            // so mobile browsers don't block it as a popup
-            const newTab = window.open('about:blank', '_blank');
-
-            // Show a branded loading state so the user doesn't see a blank tab
-            if (newTab) {
-                const doc = newTab.document;
-                const html = doc.documentElement;
-                html.lang = 'en';
-
-                const head = doc.head;
-                const title = doc.createElement('title');
-                title.textContent = 'GatherUp Playbook';
-                head.appendChild(title);
-
-                // Load Montserrat to match the main site
-                const fontLink = doc.createElement('link');
-                fontLink.rel = 'stylesheet';
-                fontLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
-                head.appendChild(fontLink);
-
-                const style = doc.createElement('style');
-                style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
-                head.appendChild(style);
-
-                const body = doc.body;
-                body.style.cssText = 'margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#053d3d;font-family:Montserrat,Arial,Helvetica,sans-serif;color:white;text-align:center;';
-
-                const wrapper = doc.createElement('div');
-
-                const spinnerDiv = doc.createElement('div');
-                spinnerDiv.style.marginBottom = '24px';
-                const svg = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                svg.setAttribute('width', '48');
-                svg.setAttribute('height', '48');
-                svg.setAttribute('viewBox', '0 0 24 24');
-                svg.setAttribute('fill', 'none');
-                svg.setAttribute('stroke', '#a6ff48');
-                svg.setAttribute('stroke-width', '2');
-                svg.style.animation = 'spin 1s linear infinite';
-                const path = doc.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', 'M12 2a10 10 0 0 1 10 10');
-                path.setAttribute('stroke-linecap', 'round');
-                svg.appendChild(path);
-                spinnerDiv.appendChild(svg);
-                wrapper.appendChild(spinnerDiv);
-
-                const heading = doc.createElement('p');
-                heading.style.cssText = 'font-size:20px;font-weight:700;color:#a6ff48;margin:0 0 8px;font-family:Montserrat,Arial,Helvetica,sans-serif;';
-                heading.textContent = 'Preparing your playbook...';
-                wrapper.appendChild(heading);
-
-                const subtitle = doc.createElement('p');
-                subtitle.style.cssText = 'font-size:14px;color:#bce8e7;margin:0;font-family:Montserrat,Arial,Helvetica,sans-serif;line-height:1.5;';
-                subtitle.textContent = 'This will only take a moment.';
-                wrapper.appendChild(subtitle);
-
-                body.appendChild(wrapper);
+            // Verify we actually got a PDF back, not an empty or wrong response
+            const contentType = response.headers.get('Content-Type') || '';
+            if (!contentType.includes('application/pdf')) {
+                throw new Error('Unexpected response. Please try again.');
             }
 
-            // Fetch the PDF
-            const pdfResponse = await fetch('/api/playbook-download');
-            if (!pdfResponse.ok) {
-                newTab?.close();
-                throw new Error('Failed to download the playbook.');
+            const blob = await response.blob();
+
+            // Guard against empty/truncated responses
+            if (blob.size < 1000) {
+                throw new Error('Download incomplete. Please try again.');
             }
 
-            const blob = await pdfResponse.blob();
             const url = URL.createObjectURL(blob);
 
             if (newTab) {
-                // New tab opened successfully — navigate it to the PDF
                 newTab.location.href = url;
             } else {
                 // Popup was blocked — fall back to download in same tab
@@ -127,10 +131,49 @@ export const DownloadSection: React.FC = () => {
 
             setStatus('success');
         } catch (err) {
+            const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+
+            // Show error in the new tab so the user knows what happened
+            if (newTab) {
+                try {
+                    const doc = newTab.document;
+                    const body = doc.body;
+                    // Clear loading state using DOM methods
+                    while (body.firstChild) {
+                        body.removeChild(body.firstChild);
+                    }
+                    body.style.cssText = 'margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#053d3d;font-family:Montserrat,Arial,Helvetica,sans-serif;color:white;text-align:center;';
+
+                    const wrapper = doc.createElement('div');
+
+                    const icon = doc.createElement('p');
+                    icon.style.cssText = 'font-size:48px;margin:0 0 16px;';
+                    icon.textContent = '\u26A0';
+                    wrapper.appendChild(icon);
+
+                    const heading = doc.createElement('p');
+                    heading.style.cssText = 'font-size:20px;font-weight:700;color:#a6ff48;margin:0 0 8px;';
+                    heading.textContent = 'Download failed';
+                    wrapper.appendChild(heading);
+
+                    const detail = doc.createElement('p');
+                    detail.style.cssText = 'font-size:14px;color:#bce8e7;margin:0 0 24px;max-width:400px;line-height:1.5;';
+                    detail.textContent = message;
+                    wrapper.appendChild(detail);
+
+                    const hint = doc.createElement('p');
+                    hint.style.cssText = 'font-size:13px;color:#bce8e7;opacity:0.6;margin:0;';
+                    hint.textContent = 'You can close this tab and try again.';
+                    wrapper.appendChild(hint);
+
+                    body.appendChild(wrapper);
+                } catch {
+                    newTab.close();
+                }
+            }
+
             setStatus('error');
-            setErrorMessage(
-                err instanceof Error ? err.message : 'Something went wrong. Please try again.'
-            );
+            setErrorMessage(message);
         }
     };
 
@@ -175,15 +218,13 @@ export const DownloadSection: React.FC = () => {
                             </h3>
                             <p className="font-sans text-base text-[#bce8e7] text-center max-w-md">
                                 Your playbook should have opened in a new tab. If not,{' '}
-                                <a
-                                    href="/api/playbook-download"
-                                    download="GatherUp-Playbook.pdf"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <button
+                                    type="button"
+                                    onClick={() => setStatus('idle')}
                                     className="text-[#a6ff48] underline"
                                 >
                                     click here to try again
-                                </a>.
+                                </button>.
                             </p>
                         </div>
                     ) : (

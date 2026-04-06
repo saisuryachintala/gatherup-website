@@ -42,21 +42,88 @@ export const DownloadSection: React.FC = () => {
                 throw new Error(data.error || 'Something went wrong.');
             }
 
-            // Trigger PDF download from API (streams from Google Drive)
+            // Open a new tab immediately (while still in user gesture context)
+            // so mobile browsers don't block it as a popup
+            const newTab = window.open('about:blank', '_blank');
+
+            // Show a branded loading state so the user doesn't see a blank tab
+            if (newTab) {
+                const doc = newTab.document;
+                const html = doc.documentElement;
+                html.lang = 'en';
+
+                const head = doc.head;
+                const title = doc.createElement('title');
+                title.textContent = 'GatherUp Playbook';
+                head.appendChild(title);
+
+                // Load Montserrat to match the main site
+                const fontLink = doc.createElement('link');
+                fontLink.rel = 'stylesheet';
+                fontLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
+                head.appendChild(fontLink);
+
+                const style = doc.createElement('style');
+                style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+                head.appendChild(style);
+
+                const body = doc.body;
+                body.style.cssText = 'margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#053d3d;font-family:Montserrat,Arial,Helvetica,sans-serif;color:white;text-align:center;';
+
+                const wrapper = doc.createElement('div');
+
+                const spinnerDiv = doc.createElement('div');
+                spinnerDiv.style.marginBottom = '24px';
+                const svg = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('width', '48');
+                svg.setAttribute('height', '48');
+                svg.setAttribute('viewBox', '0 0 24 24');
+                svg.setAttribute('fill', 'none');
+                svg.setAttribute('stroke', '#a6ff48');
+                svg.setAttribute('stroke-width', '2');
+                svg.style.animation = 'spin 1s linear infinite';
+                const path = doc.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', 'M12 2a10 10 0 0 1 10 10');
+                path.setAttribute('stroke-linecap', 'round');
+                svg.appendChild(path);
+                spinnerDiv.appendChild(svg);
+                wrapper.appendChild(spinnerDiv);
+
+                const heading = doc.createElement('p');
+                heading.style.cssText = 'font-size:20px;font-weight:700;color:#a6ff48;margin:0 0 8px;font-family:Montserrat,Arial,Helvetica,sans-serif;';
+                heading.textContent = 'Preparing your playbook...';
+                wrapper.appendChild(heading);
+
+                const subtitle = doc.createElement('p');
+                subtitle.style.cssText = 'font-size:14px;color:#bce8e7;margin:0;font-family:Montserrat,Arial,Helvetica,sans-serif;line-height:1.5;';
+                subtitle.textContent = 'This will only take a moment.';
+                wrapper.appendChild(subtitle);
+
+                body.appendChild(wrapper);
+            }
+
+            // Fetch the PDF
             const pdfResponse = await fetch('/api/playbook-download');
             if (!pdfResponse.ok) {
+                newTab?.close();
                 throw new Error('Failed to download the playbook.');
             }
 
             const blob = await pdfResponse.blob();
             const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'GatherUp-Playbook.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+
+            if (newTab) {
+                // New tab opened successfully — navigate it to the PDF
+                newTab.location.href = url;
+            } else {
+                // Popup was blocked — fall back to download in same tab
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'GatherUp-Playbook.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
 
             setStatus('success');
         } catch (err) {
@@ -86,7 +153,7 @@ export const DownloadSection: React.FC = () => {
                             Get Your Free Copy Below
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight text-center">
+                    <h2 className="font-sans font-bold text-white text-2xl md:text-[32px] md:leading-tight text-center">
                         Download the Full Playbook
                     </h2>
                 </motion.div>
@@ -103,14 +170,16 @@ export const DownloadSection: React.FC = () => {
                                     <polyline points="20 6 9 17 4 12" />
                                 </svg>
                             </div>
-                            <h3 className="font-sans font-bold text-2xl text-[#e0f2cc] text-center">
-                                Your download has started!
+                            <h3 className="font-sans font-bold text-2xl text-white text-center">
+                                Your playbook is ready!
                             </h3>
                             <p className="font-sans text-base text-[#bce8e7] text-center max-w-md">
-                                Check your downloads folder for the Playbook. If it didn&apos;t download,{' '}
+                                Your playbook should have opened in a new tab. If not,{' '}
                                 <a
                                     href="/api/playbook-download"
                                     download="GatherUp-Playbook.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-[#a6ff48] underline"
                                 >
                                     click here to try again
@@ -120,7 +189,7 @@ export const DownloadSection: React.FC = () => {
                     ) : (
                         <div className="flex flex-col gap-6">
                             <div>
-                                <h3 className="font-sans font-bold text-xl md:text-2xl text-[#e0f2cc]">
+                                <h3 className="font-sans font-bold text-xl md:text-2xl text-white">
                                     Get Instant Access
                                 </h3>
                                 <p className="font-sans text-sm text-[#bce8e7] leading-normal mt-1">
@@ -141,29 +210,36 @@ export const DownloadSection: React.FC = () => {
                                 {/* Row 1: Name + Email */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-[#e0f2cc]">
+                                        <label className="font-sans text-sm text-white">
                                             Full Name<span className="text-[#a6ff48]">*</span>
                                         </label>
                                         <input
                                             type="text"
                                             name="fullName"
                                             required
+                                            minLength={2}
+                                            maxLength={100}
+                                            pattern="[A-Za-z\s\-'.]{2,100}"
+                                            title="Please enter a valid name (letters, spaces, hyphens, apostrophes)"
                                             placeholder="Full Name"
+                                            autoComplete="name"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-[#e0f2cc]">
+                                        <label className="font-sans text-sm text-white">
                                             Email Address<span className="text-[#a6ff48]">*</span>
                                         </label>
                                         <input
                                             type="email"
                                             name="email"
                                             required
+                                            maxLength={254}
                                             placeholder="Email Address"
+                                            autoComplete="email"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                 </div>
@@ -171,27 +247,31 @@ export const DownloadSection: React.FC = () => {
                                 {/* Row 2: Property + Location */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-[#e0f2cc]">
+                                        <label className="font-sans text-sm text-white">
                                             Property Name (Optional)
                                         </label>
                                         <input
                                             type="text"
                                             name="propertyName"
+                                            maxLength={200}
                                             placeholder="Property Name"
+                                            autoComplete="organization"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-[#e0f2cc]">
+                                        <label className="font-sans text-sm text-white">
                                             Location (Optional)
                                         </label>
                                         <input
                                             type="text"
                                             name="location"
+                                            maxLength={200}
                                             placeholder="Location"
+                                            autoComplete="address-level2"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                 </div>

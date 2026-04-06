@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from './Button';
 import Image from 'next/image';
 import { BookDemoButton } from './BookDemoButton';
 import { fadeInUp, imageLoad, staggerContainer } from '@/utils/animations';

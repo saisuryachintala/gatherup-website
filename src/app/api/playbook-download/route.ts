@@ -60,16 +60,30 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const { fullName, email, propertyName, location, consent } = body;
 
-        if (!fullName || typeof fullName !== 'string' || fullName.trim().length === 0) {
+        if (!fullName || typeof fullName !== 'string' || fullName.trim().length < 2 || fullName.trim().length > 100) {
             return NextResponse.json(
-                { error: 'Full name is required.' },
+                { error: 'Full name is required (2-100 characters).' },
                 { status: 400 }
             );
         }
 
-        if (!email || !validateEmail(email)) {
+        if (!email || typeof email !== 'string' || email.length > 254 || !validateEmail(email)) {
             return NextResponse.json(
                 { error: 'A valid email address is required.' },
+                { status: 400 }
+            );
+        }
+
+        if (propertyName && (typeof propertyName !== 'string' || propertyName.length > 200)) {
+            return NextResponse.json(
+                { error: 'Property name must be under 200 characters.' },
+                { status: 400 }
+            );
+        }
+
+        if (location && (typeof location !== 'string' || location.length > 200)) {
+            return NextResponse.json(
+                { error: 'Location must be under 200 characters.' },
                 { status: 400 }
             );
         }

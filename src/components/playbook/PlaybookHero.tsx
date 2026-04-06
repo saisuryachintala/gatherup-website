@@ -35,13 +35,14 @@ export const PlaybookHero: React.FC = () => {
                         </span>
                     </div>
 
-                    <h1 className="font-sans font-black text-[#e0f2cc] text-3xl md:text-[48px] md:leading-[1.04] uppercase">
+                    <h1 className="font-sans font-black text-white text-3xl md:text-[48px] md:leading-[1.04] uppercase">
                         The Tenant<br />
                         Engagement<br />
+                        {/* text-[#e0f2cc] */}
                         <span className="text-[#a6ff48]">Playbook</span>
                     </h1>
 
-                    <p className="font-sans text-lg md:text-xl text-[#e0f2cc] leading-normal">
+                    <p className="font-sans text-lg md:text-xl text-white leading-normal">
                         Download our free comprehensive wellness guide and discover how
                         leading properties drive tenant satisfaction, community, and
                         occupancy.
@@ -57,7 +58,7 @@ export const PlaybookHero: React.FC = () => {
                                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#053d3d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </a>
-                        <span className="font-sans text-sm text-[#e0f2cc]">
+                        <span className="font-sans text-sm text-white">
                             No Credit card required | Instant Download
                         </span>
                     </div>
@@ -85,7 +86,7 @@ export const PlaybookHero: React.FC = () => {
 
                     <div className="flex flex-col gap-4">
                         <div>
-                            <h2 className="font-sans font-black text-2xl md:text-4xl text-[#e0f2cc] capitalize leading-[1.04]">
+                            <h2 className="font-sans font-black text-2xl md:text-4xl text-white capitalize leading-[1.04]">
                                 The Tenant Engagement
                             </h2>
                             <h2 className="font-sans font-black text-2xl md:text-4xl text-[#a6ff48] capitalize leading-[1.04]">
@@ -95,7 +96,7 @@ export const PlaybookHero: React.FC = () => {
 
                         <div className="h-px bg-[#a6ff48]/30 w-full" />
 
-                        <p className="font-sans text-lg md:text-xl text-[#e0f2cc] leading-normal">
+                        <p className="font-sans text-lg md:text-xl text-white leading-normal">
                             How leading properties drive tenant satisfaction, community,
                             and occupancy by:
                         </p>

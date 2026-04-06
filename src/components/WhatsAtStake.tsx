@@ -38,7 +38,7 @@ export const WhatsAtStake: React.FC = () => {
                         variants={scrollReveal}
                         className="text-3xl font-bold text-[#a6ff48] font-display mb-4"
                     >
-                        What's at stake?
+                        What&apos;s at stake?
                     </motion.h2>
                     <motion.p
                         variants={scrollReveal}

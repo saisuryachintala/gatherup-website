@@ -3,7 +3,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { ScrollingLogos } from './ScrollingLogos';
 import { scrollReveal, imageLoad, staggerContainer } from '@/utils/animations';
 
 export const OurMission: React.FC = () => {

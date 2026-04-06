@@ -67,7 +67,7 @@ export const WhyGatherUp: React.FC = () => {
                                 </p>
                                 <div className="h-0.25 w-64 md:w-128 bg-[#053d3d]/40 rounded-full mb-6 mx-auto"></div>
                                 <p>
-                                    <span className="italic">That's where we come in.</span>
+                                    <span className="italic">That&apos;s where we come in.</span>
                                 </p>
                                 <p>
                                     GatherUp designs and delivers wellness programming that drives engagement, boosts retention, and improves property performance.

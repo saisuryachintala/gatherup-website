@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from './Button';
 import { BookDemoButton } from './BookDemoButton';
 
 export const Header: React.FC = () => {
@@ -12,7 +11,7 @@ export const Header: React.FC = () => {
     const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
     const [headerHeight, setHeaderHeight] = useState(112); // Default to h-28 (7rem = 112px)
     const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const lastScrollYRef = useRef(0);
     const headerRef = useRef<HTMLElement>(null);
     const pathname = usePathname();
 
@@ -59,35 +58,24 @@ export const Header: React.FC = () => {
     }, [mobileMenuOpen]);
 
     // Floating header scroll detection
-    useEffect(() => {
-        // Always show header when mobile menu is open
-        if (mobileMenuOpen) {
+    const handleScroll = useCallback(() => {
+        const currentScrollY = window.scrollY;
+        const scrollThreshold = 10;
+
+        if (currentScrollY < scrollThreshold) {
             setIsHeaderVisible(true);
-            return;
+        } else if (currentScrollY > lastScrollYRef.current && currentScrollY > scrollThreshold) {
+            setIsHeaderVisible(false);
+        } else if (currentScrollY < lastScrollYRef.current) {
+            setIsHeaderVisible(true);
         }
 
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            const scrollThreshold = 10; // Minimum scroll distance to trigger hide/show
+        lastScrollYRef.current = currentScrollY;
+    }, []);
 
-            // Always show header at the top of the page
-            if (currentScrollY < scrollThreshold) {
-                setIsHeaderVisible(true);
-            } else {
-                // Hide when scrolling down, show when scrolling up
-                if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
-                    // Scrolling down
-                    setIsHeaderVisible(false);
-                } else if (currentScrollY < lastScrollY) {
-                    // Scrolling up
-                    setIsHeaderVisible(true);
-                }
-            }
+    useEffect(() => {
+        if (mobileMenuOpen) return;
 
-            setLastScrollY(currentScrollY);
-        };
-
-        // Throttle scroll events for better performance
         let ticking = false;
         const throttledHandleScroll = () => {
             if (!ticking) {
@@ -101,7 +89,7 @@ export const Header: React.FC = () => {
 
         window.addEventListener('scroll', throttledHandleScroll, { passive: true });
         return () => window.removeEventListener('scroll', throttledHandleScroll);
-    }, [lastScrollY, mobileMenuOpen]);
+    }, [mobileMenuOpen, handleScroll]);
 
     return (
         <>

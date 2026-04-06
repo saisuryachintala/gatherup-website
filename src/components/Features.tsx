@@ -28,9 +28,9 @@ export const Features: React.FC = () => {
         <section className="py-20 bg-[#f8fafc]">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-4xl font-bold text-primary mb-4">Here's why we stand out:</h2>
+                    <h2 className="text-4xl font-bold text-primary mb-4">Here&apos;s why we stand out:</h2>
                     <p className="text-gray-600 text-lg">
-                        We don't just offer tools; we offer a transformation. Our holistic approach ensures sustainable well-being for your entire organization.
+                        We don&apos;t just offer tools; we offer a transformation. Our holistic approach ensures sustainable well-being for your entire organization.
                     </p>
                 </div>
 

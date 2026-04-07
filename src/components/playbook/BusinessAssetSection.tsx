@@ -60,7 +60,7 @@ export const BusinessAssetSection: React.FC = () => {
                             Why it matters
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
+                    <h2 className="font-sans font-semibold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
                         Engagement is a <span className="text-[#a6ff48]">Business Asset</span>, not an option.
                     </h2>
                 </motion.div>
@@ -78,7 +78,7 @@ export const BusinessAssetSection: React.FC = () => {
                                 className="bg-[#3d6e6e]/30 border border-[#a6ff48]/30 rounded-2xl p-5 flex flex-col gap-2 justify-center"
                                 variants={scrollReveal}
                             >
-                                <span className="font-sans font-black text-2xl md:text-3xl text-[#a6ff48]">
+                                <span className="font-sans font-bold text-2xl md:text-3xl text-[#a6ff48]">
                                     {stat.value}
                                 </span>
                                 <p className="font-sans text-sm text-[#bce8e7] leading-normal">

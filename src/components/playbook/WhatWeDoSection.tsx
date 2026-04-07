@@ -53,16 +53,16 @@ export const WhatWeDoSection: React.FC = () => {
                 animate={isInView ? 'visible' : 'hidden'}
             >
                 {/* Badge + Heading */}
-                <motion.div className="flex flex-col gap-3" variants={scrollReveal}>
-                    <div className="inline-flex self-start border border-[#a6ff48] rounded-2xl px-4 py-2">
+                <motion.div className="flex flex-col gap-3 items-center lg:items-start" variants={scrollReveal}>
+                    <div className="inline-flex border border-[#a6ff48] rounded-2xl px-4 py-2">
                         <span className="font-sans text-sm text-[#a6ff48] uppercase tracking-wide">
                             What Do We Do?
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
+                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight text-center lg:text-left">
                         Wellness that <span className="text-[#a6ff48] uppercase">Transforms</span> properties
                     </h2>
-                    <p className="font-sans text-[#e0f2cc] md:text-lg text-[#bce8e7] leading-normal max-w-3xl">
+                    <p className="font-sans text-[#e0f2cc] md:text-lg text-[#bce8e7] leading-normal max-w-3xl text-center lg:text-left">
                         GatherUp designs and delivers tenant engagement programming that turns your amenity spaces
                         from a line item into a measurable competitive advantage.
                     </p>

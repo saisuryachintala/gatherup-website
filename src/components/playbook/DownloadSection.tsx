@@ -12,6 +12,8 @@ export const DownloadSection: React.FC = () => {
     const [consent, setConsent] = useState(false);
     const [status, setStatus] = useState<FormStatus>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -264,6 +266,8 @@ export const DownloadSection: React.FC = () => {
                                             title="Please enter a valid name (letters, spaces, hyphens, apostrophes)"
                                             placeholder="Full Name"
                                             autoComplete="name"
+                                            value={fullName}
+                                            onChange={(e) => setFullName(e.target.value)}
                                             disabled={status === 'submitting'}
                                             className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
@@ -279,6 +283,8 @@ export const DownloadSection: React.FC = () => {
                                             maxLength={254}
                                             placeholder="Email Address"
                                             autoComplete="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             disabled={status === 'submitting'}
                                             className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
@@ -317,26 +323,26 @@ export const DownloadSection: React.FC = () => {
                                     </div>
                                 </div>
 
-                                {/* Consent */}
-                                <label className="flex items-center gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={consent}
-                                        onChange={(e) => setConsent(e.target.checked)}
-                                        disabled={status === 'submitting'}
-                                        className="w-5 h-5 rounded border-[#a6ff48]/30 bg-[#0a5c5c] accent-[#a6ff48]"
-                                    />
-                                    <span className="font-sans text-sm text-[#bce8e7]">
-                                        I provide consent to receive communications about GatherUp services.
-                                    </span>
-                                </label>
+                                {/* Consent + Submit centered */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <label className="flex items-center gap-3 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={consent}
+                                            onChange={(e) => setConsent(e.target.checked)}
+                                            disabled={status === 'submitting'}
+                                            className="w-5 h-5 rounded border-[#a6ff48]/30 bg-[#0a5c5c] accent-[#a6ff48]"
+                                        />
+                                        <span className="font-sans text-sm text-[#bce8e7]">
+                                            I provide consent to receive communications about GatherUp services.
+                                        </span>
+                                    </label>
 
-                                {/* Submit */}
-                                <button
-                                    type="submit"
-                                    disabled={status === 'submitting'}
-                                    className="bg-[#a6ff48] text-[#053d3d] font-sans font-bold text-base rounded-3xl px-8 py-3 hover:brightness-110 transition-all self-start disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                                >
+                                    <button
+                                        type="submit"
+                                        disabled={status === 'submitting' || fullName.trim().length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)}
+                                        className="bg-[#a6ff48] text-[#053d3d] font-sans font-bold text-base rounded-3xl px-8 py-3 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                                    >
                                     {status === 'submitting' ? (
                                         <>
                                             <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
@@ -348,7 +354,8 @@ export const DownloadSection: React.FC = () => {
                                     ) : (
                                         'Download Free Playbook'
                                     )}
-                                </button>
+                                    </button>
+                                </div>
                             </form>
 
                             {/* Privacy Notice */}

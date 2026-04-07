@@ -35,7 +35,7 @@ export const PlaybookHero: React.FC = () => {
                         </span>
                     </div>
 
-                    <h1 className="font-sans font-black text-white text-3xl md:text-[48px] md:leading-[1.04] uppercase">
+                    <h1 className="font-sans font-black text-[#e0f2cc] text-3xl md:text-[48px] md:leading-[1.04] uppercase">
                         The Tenant<br />
                         Engagement<br />
                         {/* text-[#e0f2cc] */}

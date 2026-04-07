@@ -60,8 +60,8 @@ export const BusinessAssetSection: React.FC = () => {
                             What If We Told You
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-white text-2xl md:text-[32px] md:leading-tight">
-                        Engagement is a <span className="font-black">Business Asset</span>, not an option.
+                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
+                        Engagement is a <span className="text-[#a6ff48]">Business Asset</span>, not an option.
                     </h2>
                 </motion.div>
 
@@ -93,7 +93,7 @@ export const BusinessAssetSection: React.FC = () => {
                         className="border border-[#a6ff48] rounded-[20px] p-6 md:p-8 flex flex-col gap-4 justify-center lg:flex-1"
                         variants={scrollReveal}
                     >
-                        <p className="font-sans text-base md:text-lg text-white leading-normal">
+                        <p className="font-sans text-base md:text-lg text-[#e0f2cc] leading-normal">
                             Commercial office buildings no longer compete on location and square footage alone.
                         </p>
                         <div className="flex flex-col gap-4">

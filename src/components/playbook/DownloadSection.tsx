@@ -196,7 +196,7 @@ export const DownloadSection: React.FC = () => {
                             Get Your Free Copy Below
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-white text-2xl md:text-[32px] md:leading-tight text-center">
+                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight text-center">
                         Download the Full Playbook
                     </h2>
                 </motion.div>
@@ -213,7 +213,7 @@ export const DownloadSection: React.FC = () => {
                                     <polyline points="20 6 9 17 4 12" />
                                 </svg>
                             </div>
-                            <h3 className="font-sans font-bold text-2xl text-white text-center">
+                            <h3 className="font-sans font-bold text-2xl text-[#e0f2cc] text-center">
                                 Your playbook is ready!
                             </h3>
                             <p className="font-sans text-base text-[#bce8e7] text-center max-w-md">
@@ -230,7 +230,7 @@ export const DownloadSection: React.FC = () => {
                     ) : (
                         <div className="flex flex-col gap-6">
                             <div>
-                                <h3 className="font-sans font-bold text-xl md:text-2xl text-white">
+                                <h3 className="font-sans font-bold text-xl md:text-2xl text-[#e0f2cc]">
                                     Get Instant Access
                                 </h3>
                                 <p className="font-sans text-sm text-[#bce8e7] leading-normal mt-1">
@@ -251,7 +251,7 @@ export const DownloadSection: React.FC = () => {
                                 {/* Row 1: Name + Email */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-white">
+                                        <label className="font-sans text-sm text-[#e0f2cc]">
                                             Full Name<span className="text-[#a6ff48]">*</span>
                                         </label>
                                         <input
@@ -265,11 +265,11 @@ export const DownloadSection: React.FC = () => {
                                             placeholder="Full Name"
                                             autoComplete="name"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-white">
+                                        <label className="font-sans text-sm text-[#e0f2cc]">
                                             Email Address<span className="text-[#a6ff48]">*</span>
                                         </label>
                                         <input
@@ -280,7 +280,7 @@ export const DownloadSection: React.FC = () => {
                                             placeholder="Email Address"
                                             autoComplete="email"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@ export const DownloadSection: React.FC = () => {
                                 {/* Row 2: Property + Location */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-white">
+                                        <label className="font-sans text-sm text-[#e0f2cc]">
                                             Property Name (Optional)
                                         </label>
                                         <input
@@ -298,11 +298,11 @@ export const DownloadSection: React.FC = () => {
                                             placeholder="Property Name"
                                             autoComplete="organization"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <label className="font-sans text-sm text-white">
+                                        <label className="font-sans text-sm text-[#e0f2cc]">
                                             Location (Optional)
                                         </label>
                                         <input
@@ -312,7 +312,7 @@ export const DownloadSection: React.FC = () => {
                                             placeholder="Location"
                                             autoComplete="address-level2"
                                             disabled={status === 'submitting'}
-                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-white placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
+                                            className="bg-[#0a5c5c] border border-[#a6ff48]/30 rounded-lg px-4 py-3 font-sans text-sm text-[#e0f2cc] placeholder-[#bce8e7]/50 focus:outline-none focus:border-[#a6ff48] transition-colors disabled:opacity-50"
                                         />
                                     </div>
                                 </div>

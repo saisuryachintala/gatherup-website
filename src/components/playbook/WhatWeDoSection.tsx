@@ -59,10 +59,10 @@ export const WhatWeDoSection: React.FC = () => {
                             What Do We Do?
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-white text-2xl md:text-[32px] md:leading-tight">
-                        Wellness that <span className="font-black uppercase">Transforms</span> properties
+                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
+                        Wellness that <span className="text-[#a6ff48] uppercase">Transforms</span> properties
                     </h2>
-                    <p className="font-sans text-base md:text-lg text-[#bce8e7] leading-normal max-w-3xl">
+                    <p className="font-sans text-[#e0f2cc] md:text-lg text-[#bce8e7] leading-normal max-w-3xl">
                         GatherUp designs and delivers tenant engagement programming that turns your amenity spaces
                         from a line item into a measurable competitive advantage.
                     </p>
@@ -79,7 +79,7 @@ export const WhatWeDoSection: React.FC = () => {
                             className="border border-[#a6ff48] rounded-[20px] p-6 flex flex-col gap-2"
                             variants={scrollReveal}
                         >
-                            <h3 className="font-sans font-bold text-lg text-white">
+                            <h3 className="font-sans font-bold text-lg text-[#e0f2cc]">
                                 {item.title}
                             </h3>
                             <p className="font-sans text-sm text-[#bce8e7] leading-normal">

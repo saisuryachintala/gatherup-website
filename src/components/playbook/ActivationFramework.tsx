@@ -28,11 +28,11 @@ const pillars = [
 ];
 
 const learnings = [
-    'Why low attendance is always a system problem.',
+    //'Why low attendance is always a system problem.',
     'How to run a quarterly tenant pulse survey in under 2 minutes',
     'The 3-touch activation rhythm that eliminates guesswork',
     'The 72-hour readiness checklist for flawless execution',
-    'Simple metrics that make programming an asset-level KPI',
+    //'Simple metrics that make programming an asset-level KPI',
     'How engagement data strengthens leasing tours and renewal conversations',
     'A 30-day implementation plan with clear ownership assignments',
     'A self-assessment tool to identify your highest-impact 90-day focus',

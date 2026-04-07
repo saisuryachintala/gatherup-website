@@ -70,7 +70,7 @@ export const ActivationFramework: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-4 flex-1">
                     {/* Left: Playbook description card */}
                     <motion.div
-                        className="border border-[#a6ff48] rounded-[20px] px-6 py-5 md:px-10 md:py-5 flex flex-col gap-4 justify-center lg:flex-1"
+                        className="bg-[#3d6e6e]/30 border border-[#a6ff48]/30 rounded-2xl px-6 py-5 md:px-10 md:py-5 flex flex-col gap-4 justify-center lg:flex-1"
                         variants={scrollReveal}
                     >
                         <p className="font-sans text-base md:text-xl text-[#e0f2cc] leading-normal">
@@ -110,7 +110,7 @@ export const ActivationFramework: React.FC = () => {
                         {pillars.map((pillar, index) => (
                             <motion.div
                                 key={index}
-                                className="border border-[#a6ff48] rounded-[20px] p-5 flex flex-col justify-center flex-1"
+                                className="bg-[#3d6e6e]/30 border border-[#a6ff48]/30 rounded-2xl p-5 flex flex-col justify-center flex-1"
                                 variants={scrollReveal}
                             >
                                 <h3 className="font-sans font-bold text-xl text-[#e0f2cc]">

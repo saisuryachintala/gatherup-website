@@ -76,7 +76,7 @@ export const WhatWeDoSection: React.FC = () => {
                     {capabilities.map((item, index) => (
                         <motion.div
                             key={index}
-                            className="border border-[#a6ff48] rounded-[20px] p-6 flex flex-col gap-2"
+                            className="bg-[#3d6e6e]/30 border border-[#a6ff48]/30 rounded-2xl p-6 flex flex-col gap-2"
                             variants={scrollReveal}
                         >
                             <h3 className="font-sans font-bold text-lg text-[#e0f2cc]">

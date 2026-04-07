@@ -57,7 +57,7 @@ export const BusinessAssetSection: React.FC = () => {
                 <motion.div className="flex flex-col gap-3" variants={scrollReveal}>
                     <div className="inline-flex self-start border border-[#a6ff48] rounded-2xl px-4 py-2">
                         <span className="font-sans text-sm text-[#a6ff48] uppercase tracking-wide">
-                            What If We Told You
+                            Why it matters
                         </span>
                     </div>
                     <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
@@ -75,7 +75,7 @@ export const BusinessAssetSection: React.FC = () => {
                         {stats.map((stat, index) => (
                             <motion.div
                                 key={index}
-                                className="border border-[#a6ff48] rounded-[20px] p-5 flex flex-col gap-2 justify-center"
+                                className="bg-[#3d6e6e]/30 border border-[#a6ff48]/30 rounded-2xl p-5 flex flex-col gap-2 justify-center"
                                 variants={scrollReveal}
                             >
                                 <span className="font-sans font-black text-2xl md:text-3xl text-[#a6ff48]">
@@ -90,7 +90,7 @@ export const BusinessAssetSection: React.FC = () => {
 
                     {/* Right: Advantages */}
                     <motion.div
-                        className="border border-[#a6ff48] rounded-[20px] p-6 md:p-8 flex flex-col gap-4 justify-center lg:flex-1"
+                        className="bg-[#3d6e6e]/30 border border-[#a6ff48]/30 rounded-2xl p-6 md:p-8 flex flex-col gap-4 justify-center lg:flex-1"
                         variants={scrollReveal}
                     >
                         <p className="font-sans text-base md:text-lg text-[#e0f2cc] leading-normal">

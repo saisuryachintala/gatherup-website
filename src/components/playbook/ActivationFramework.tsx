@@ -45,7 +45,7 @@ export const ActivationFramework: React.FC = () => {
     return (
         <section
             ref={sectionRef}
-            className="bg-[#053d3d] px-5 py-12 md:px-10 md:py-[50px] lg:px-[120px] xl:px-[200px]"
+            className="bg-[#053d3d] px-5 py-12 md:px-10 md:py-[50px] lg:px-16 xl:px-[120px] 2xl:px-[200px]"
         >
             <motion.div
                 className="max-w-7xl mx-auto flex flex-col gap-4"

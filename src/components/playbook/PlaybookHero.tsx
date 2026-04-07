@@ -19,16 +19,16 @@ export const PlaybookHero: React.FC = () => {
     return (
         <section
             ref={sectionRef}
-            className="bg-gradient-to-r from-[#053d3d] to-[rgba(166,255,72,0.05)] px-5 py-12 md:px-10 md:py-12 lg:px-[120px] xl:px-[200px]"
+            className="bg-gradient-to-r from-[#053d3d] to-[rgba(166,255,72,0.05)] px-5 py-12 md:px-10 md:py-12 lg:px-16 xl:px-[120px] 2xl:px-[200px]"
         >
             <motion.div
-                className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-[100px] items-center"
+                className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-12 xl:gap-[100px] items-center"
                 variants={staggerContainer}
                 initial="hidden"
                 animate={isInView ? 'visible' : 'hidden'}
             >
                 {/* Left: Title + CTA */}
-                <motion.div className="flex flex-col gap-5 lg:shrink-0 lg:max-w-[504px]" variants={scrollReveal}>
+                <motion.div className="flex flex-col gap-5 lg:shrink-0 lg:max-w-[420px] xl:max-w-[504px]" variants={scrollReveal}>
                     <div className="inline-flex self-start border border-[#a6ff48] rounded-2xl px-4 py-2">
                         <span className="font-sans text-sm text-[#a6ff48] uppercase">
                             Resource

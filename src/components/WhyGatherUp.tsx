@@ -40,7 +40,7 @@ export const WhyGatherUp: React.FC = () => {
                 initial="hidden"
                 animate={headerInView ? "visible" : "hidden"}
             >
-                <p className="text-4xl md:text-5xl font-bold text-white font-display">
+                <p className="text-4xl md:text-5xl font-bold text-[#e0f2cc] font-display">
                     Happier Tenants,
                 </p>
                 <p className="pt-4 text-4xl md:text-5xl font-bold text-[#a6ff48]">Better Business Outcomes</p>

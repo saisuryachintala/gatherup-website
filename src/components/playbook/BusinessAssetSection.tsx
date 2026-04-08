@@ -60,7 +60,7 @@ export const BusinessAssetSection: React.FC = () => {
                             Why it matters
                         </span>
                     </div>
-                    <h2 className="font-sans font-semibold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
+                    <h2 className="font-sans font-semibold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight text-center lg:text-left">
                         Engagement is a <span className="text-[#a6ff48]">Business Asset</span>,{' '}
                         <br className="lg:hidden" />not an option.
                     </h2>

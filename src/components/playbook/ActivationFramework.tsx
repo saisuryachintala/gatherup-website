@@ -60,7 +60,7 @@ export const ActivationFramework: React.FC = () => {
                             Inside the Playbook
                         </span>
                     </div>
-                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight">
+                    <h2 className="font-sans font-bold text-[#e0f2cc] text-2xl md:text-[32px] md:leading-tight text-center lg:text-left">
                         A Four-Pillar{' '}
                         <span className="text-[#a6ff48]">Activation Framework.</span>
                     </h2>

@@ -206,6 +206,18 @@ export const Header: React.FC = () => {
                                 Playbook
                             </Link>
                             <Link
+                                href="/playbook-v2"
+                                className={`transition-all duration-500 ease-in-out ${isActive('/playbook-v2')
+                                    ? 'text-[#a6ff48] font-bold'
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                            >
+                                Playbook v2
+                            </Link>
+                            <Link
                                 href="/about-us"
                                 className={`transition-all duration-500 ease-in-out ${isActive('/about-us')
                                     ? 'text-[#a6ff48] font-bold'
@@ -367,6 +379,21 @@ export const Header: React.FC = () => {
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Playbook
+                            </Link>
+                            <Link
+                                href="/playbook-v2"
+                                className={`py-2 ${isActive('/playbook-v2')
+                                    ? 'text-[#a6ff48] '
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.125rem',
+                                    fontWeight: isActive('/playbook') ? '600' : '400',
+                                    transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Playbook v2
                             </Link>
                             <Link
                                 href="/about-us"

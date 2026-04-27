@@ -6,14 +6,14 @@ import { scrollReveal, staggerContainer } from '@/utils/animations';
 
 const pillars = [
     {
-        title: 'Tenant Signal Discipline',
+        title: 'Understand What Tenants Will Show Up For',
         description:
-            'Systematically capture tenant preferences, schedules, and in-office patterns to align programming with actual demand',
+            'Have a simple way to stay in tune with tenant schedules, preferences, and when the building is most active, so you\'re not guessing what/when to offer.',
     },
     {
-        title: 'Communication Consistency',
+        title: 'Communicate Strategically',
         description:
-            'Deploy a multi-touch cadence. Calendar holds, day-before reminders, proximity pushes, and post-event social proof to anticipation and attendance.',
+            'Use rhythmic touchpoints - both before and after programs - to make sure tenants actually know what to expect and show up everytime.',
     },
     {
         title: 'Frictionless Delivery',
@@ -29,13 +29,13 @@ const pillars = [
 
 const learnings = [
     //'Why low attendance is always a system problem.',
-    'How to run a quarterly tenant pulse survey in under 2 minutes',
-    'The 3-touch activation rhythm that eliminates guesswork',
-    'The 72-hour readiness checklist for flawless execution',
+    'A step-by-step communication plan so more tenants know what\'s going on and actually show up to programs',
+    'A detailed checklist to avoid last-minute issues before each activation',
+    'A clear 30-day plan so everyone on your team knows what they\'re responsible for',
     //'Simple metrics that make programming an asset-level KPI',
-    'How engagement data strengthens leasing tours and renewal conversations',
-    'A 30-day implementation plan with clear ownership assignments',
-    'A self-assessment tool to identify your highest-impact 90-day focus',
+    'A quick way to assess what’s working, what\'s not, and where to focus next'
+    // 'A 30-day implementation plan with clear ownership assignments',
+    // 'A self-assessment tool to identify your highest-impact 90-day focus',
 ];
 
 export const ActivationFramework: React.FC = () => {
@@ -74,15 +74,12 @@ export const ActivationFramework: React.FC = () => {
                         variants={scrollReveal}
                     >
                         <p className="font-sans text-base md:text-xl text-[#e0f2cc] leading-normal">
-                            The Tenant Engagement Playbook introduces the same operating
-                            system used by high-performing properties to turn engagement
-                            from occasional programming into a repeatable performance
-                            asset.
+                            The Tenant Engagement Playbook gives you a simple, structured way to plan, promote, and run engagements without having to figure it out from scratch each time.
                         </p>
 
                         <div className="flex flex-col gap-2">
                             <p className="font-sans text-base md:text-xl text-[#a6ff48] leading-normal">
-                                What will you learn with this Playbook?
+                                How to find out what your tenants are actually interested in
                             </p>
                             <ul className="flex flex-col gap-2">
                                 {learnings.map((item, index) => (

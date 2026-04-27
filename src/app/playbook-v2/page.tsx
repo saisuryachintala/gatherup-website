@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { PlaybookHero } from '@/components/playbook/PlaybookHero';
-import { WhatWeDoSection } from '@/components/playbook/WhatWeDoSection';
-import { BusinessAssetSection } from '@/components/playbook/BusinessAssetSection';
-import { ActivationFramework } from '@/components/playbook/ActivationFramework';
-import { DownloadSection } from '@/components/playbook/DownloadSection';
+import { PlaybookHero } from '@/components/playbook-v2/PlaybookHero';
+import { WhatWeDoSection } from '@/components/playbook-v2/WhatWeDoSection';
+import { BusinessAssetSection } from '@/components/playbook-v2/BusinessAssetSection';
+import { ActivationFramework } from '@/components/playbook-v2/ActivationFramework';
+import { DownloadSection } from '@/components/playbook-v2/DownloadSection';
 import { pageLoad } from '@/utils/animations';
 
 export default function Playbook() {

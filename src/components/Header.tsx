@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
     const [activationDropdownOpen, setActivationDropdownOpen] = useState(false);
     const [headerHeight, setHeaderHeight] = useState(112); // Default to h-28 (7rem = 112px)
     const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const lastScrollYRef = useRef(0);
     const headerRef = useRef<HTMLElement>(null);
     const pathname = usePathname();
     const { savedSlugs } = useWishlist();
@@ -78,34 +78,24 @@ export const Header: React.FC = () => {
     }, [mobileMenuOpen]);
 
     // Floating header scroll detection
-    useEffect(() => {
-        // Always show header when mobile menu is open
-        if (mobileMenuOpen) {
-            return;
+    const handleScroll = useCallback(() => {
+        const currentScrollY = window.scrollY;
+        const scrollThreshold = 10;
+
+        if (currentScrollY < scrollThreshold) {
+            setIsHeaderVisible(true);
+        } else if (currentScrollY > lastScrollYRef.current && currentScrollY > scrollThreshold) {
+            setIsHeaderVisible(false);
+        } else if (currentScrollY < lastScrollYRef.current) {
+            setIsHeaderVisible(true);
         }
 
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            const scrollThreshold = 10; // Minimum scroll distance to trigger hide/show
+        lastScrollYRef.current = currentScrollY;
+    }, []);
 
-            // Always show header at the top of the page
-            if (currentScrollY < scrollThreshold) {
-                setIsHeaderVisible(true);
-            } else {
-                // Hide when scrolling down, show when scrolling up
-                if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
-                    // Scrolling down
-                    setIsHeaderVisible(false);
-                } else if (currentScrollY < lastScrollY) {
-                    // Scrolling up
-                    setIsHeaderVisible(true);
-                }
-            }
+    useEffect(() => {
+        if (mobileMenuOpen) return;
 
-            setLastScrollY(currentScrollY);
-        };
-
-        // Throttle scroll events for better performance
         let ticking = false;
         const throttledHandleScroll = () => {
             if (!ticking) {
@@ -119,7 +109,7 @@ export const Header: React.FC = () => {
 
         window.addEventListener('scroll', throttledHandleScroll, { passive: true });
         return () => window.removeEventListener('scroll', throttledHandleScroll);
-    }, [lastScrollY, mobileMenuOpen]);
+    }, [mobileMenuOpen, handleScroll]);
 
     return (
         <>
@@ -130,10 +120,10 @@ export const Header: React.FC = () => {
                     transform: isHeaderVisible || mobileMenuOpen ? 'translateY(0)' : 'translateY(-100%)',
                 }}
             >
-                <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center gap-2 lg:gap-4">
-                    <div className="w-full md:w-[65%] flex items-center justify-between gap-4 lg:gap-6 h-full">
+                <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
+                    <div className="w-full md:w-auto flex items-center justify-between gap-3 lg:gap-6 h-full">
                         {/* Logo */}
-                        <Link href="/" className="relative w-20 h-20 sm:w-20 sm:h-20 md:w-20 md:h-20 lg:w-20 lg:h-20 flex-shrink-0">
+                        <Link href="/" className="relative w-20 h-20 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0">
                             <Image
                                 src="/assets/GatherUp-Lockups/PNG/Lockups_Symbol_Fresh_Green_Transparent_Background_v2.png"
                                 alt="GatherUp Wellness"
@@ -145,7 +135,7 @@ export const Header: React.FC = () => {
                         </Link>
 
                         {/* Navigation Links */}
-                        <nav className="hidden md:flex items-center gap-6 flex-1 justify-left">
+                        <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6 whitespace-nowrap text-[0.85rem] lg:text-[1rem] xl:text-[1.05rem]">
                             {/* Home Link */}
                             <Link
                                 href="/"
@@ -154,7 +144,6 @@ export const Header: React.FC = () => {
                                     : 'text-white hover:text-[#a6ff48] font-normal'
                                     }`}
                                 style={{
-                                    fontSize: '1.05rem',
                                     transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
                                 }}
                             >
@@ -175,7 +164,6 @@ export const Header: React.FC = () => {
                                         : 'text-white hover:text-[#a6ff48] font-normal'
                                         }`}
                                     style={{
-                                        fontSize: '1.05rem',
                                         transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
                                     }}
                                     onClick={() => setSolutionsDropdownOpen(true)}
@@ -285,11 +273,34 @@ export const Header: React.FC = () => {
                                     : 'text-white hover:text-[#a6ff48] font-normal'
                                     }`}
                                 style={{
-                                    fontSize: '1.05rem',
-                                    transition: 'color 1s ease-in-out, font-size 1s ease-in-out, font-weight 1s ease-in-out, filter 1s ease-in-out'
+                                    transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
                                 }}
                             >
                                 Why it Matters
+                            </Link>
+                            <Link
+                                href="/playbook"
+                                className={`transition-all duration-500 ease-in-out ${isActive('/playbook')
+                                    ? 'text-[#a6ff48] font-bold'
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                            >
+                                Playbook
+                            </Link>
+                            <Link
+                                href="/playbook-v2"
+                                className={`transition-all duration-500 ease-in-out ${isActive('/playbook-v2')
+                                    ? 'text-[#a6ff48] font-bold'
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                            >
+                                Playbook v2
                             </Link>
                             <Link
                                 href="/about-us"
@@ -298,7 +309,6 @@ export const Header: React.FC = () => {
                                     : 'text-white hover:text-[#a6ff48] font-normal'
                                     }`}
                                 style={{
-                                    fontSize: '1.05rem',
                                     transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
                                 }}
                             >
@@ -327,7 +337,7 @@ export const Header: React.FC = () => {
                     </div>
 
                     {/* Book a Demo Button - Outside constrained container */}
-                    <div className="hidden md:flex pr-4 lg:pr-8">
+                    <div className="hidden md:flex flex-shrink-0">
                         <BookDemoButton />
                     </div>
                 </div>
@@ -500,7 +510,7 @@ export const Header: React.FC = () => {
                                     : 'text-white hover:text-[#a6ff48] font-normal'
                                     }`}
                                 style={{
-                                    fontSize: isActive('/why-it-matters') ? '1.125rem' : '1.125rem',
+                                    fontSize: '1.125rem',
                                     fontWeight: isActive('/why-it-matters') ? '600' : '400',
                                     transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
                                 }}
@@ -509,13 +519,43 @@ export const Header: React.FC = () => {
                                 Why it Matters
                             </Link>
                             <Link
+                                href="/playbook"
+                                className={`py-2 ${isActive('/playbook')
+                                    ? 'text-[#a6ff48] '
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.125rem',
+                                    fontWeight: isActive('/playbook') ? '600' : '400',
+                                    transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Playbook
+                            </Link>
+                            <Link
+                                href="/playbook-v2"
+                                className={`py-2 ${isActive('/playbook-v2')
+                                    ? 'text-[#a6ff48] '
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.125rem',
+                                    fontWeight: isActive('/playbook') ? '600' : '400',
+                                    transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Playbook v2
+                            </Link>
+                            <Link
                                 href="/about-us"
                                 className={`py-2 ${isActive('/about-us')
                                     ? 'text-[#a6ff48] '
                                     : 'text-white hover:text-[#a6ff48] font-normal'
                                     }`}
                                 style={{
-                                    fontSize: isActive('/about-us') ? '1.125rem' : '1.125rem',
+                                    fontSize: '1.125rem',
                                     fontWeight: isActive('/about-us') ? '600' : '400',
                                     transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
                                 }}

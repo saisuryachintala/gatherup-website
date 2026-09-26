@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaLinkedin, FaInstagram, FaFacebook, FaXTwitter } from 'react-icons/fa6';
+import { FaLinkedin, FaInstagram } from 'react-icons/fa6';
 
 export const Footer: React.FC = () => {
     return (
@@ -59,6 +59,7 @@ export const Footer: React.FC = () => {
                                 </ul>
                                 <li><Link href="/why-it-matters" className="hover:text-[#a6ff48] transition-colors">Why it matters</Link></li>
                                 <li><Link href="/activation-menu" className="hover:text-[#a6ff48] transition-colors">Activation Menu</Link></li>
+                                <li><Link href="/playbook" className="hover:text-[#a6ff48] transition-colors">Playbook</Link></li>
                                 <li><Link href="/about-us" className="hover:text-[#a6ff48] transition-colors">About Us</Link></li>
                             </ul>
                         </div>

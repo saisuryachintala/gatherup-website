@@ -33,13 +33,13 @@ export const BeyondPerks: React.FC = () => {
                         variants={scrollReveal}
                         className="text-lg md:text-lg text-[#053d3d] leading-relaxed mb-1"
                     >
-                        The problem isn't <span className="font-bold">what you built</span>. It's <span className="font-bold">how you activate</span>.
+                        The problem isn&apos;t <span className="font-bold">what you built</span>. It&apos;s <span className="font-bold">how you activate</span>.
                     </motion.p>
                     <motion.p
                         variants={scrollReveal}
                         className="text-lg md:text-lg text-[#053d3d] leading-relaxed mb-1"
                     >
-                        Static amenities don't create loyalty. Occasional events don't create value.
+                        Static amenities don&apos;t create loyalty. Occasional events don&apos;t create value.
                     </motion.p>
                     <motion.p
                         variants={scrollReveal}

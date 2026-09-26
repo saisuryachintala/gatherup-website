@@ -11,7 +11,7 @@ export const BlogPreview: React.FC = () => {
                     className="block group"
                 >
                     <h3 className="text-2xl md:text-3xl font-bold text-[#053d3d] mb-4 group-hover:text-[#a6ff48] transition-colors">
-                        Why You Don't Need to Reply Right Away: Reclaiming Your Time Through Healthy Email Boundaries
+                        Why You Don&apos;t Need to Reply Right Away: Reclaiming Your Time Through Healthy Email Boundaries
                     </h3>
                 </a>
             </div>

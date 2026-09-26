@@ -15,8 +15,6 @@ interface ResidentialCTASectionProps {
 export const ResidentialCTASection: React.FC<ResidentialCTASectionProps> = ({
     title = "Ready to turn your property into a community tenants love?",
     subtitle = "Let's create a place where people want to live and stay.",
-    buttonText = "Book a Demo",
-    buttonLink = "https://tidycal.com/gluckjamin/free-gatherup-consultation"
 }) => {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, amount: 0.1 });

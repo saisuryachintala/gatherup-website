@@ -21,9 +21,9 @@ export const WellBeingImperative: React.FC = () => {
                         variants={scrollReveal}
                         className="text-2xl md:text-3xl font-bold text-[#a6ff48] mb-6"
                     >
-                        It's more than a perk.<br />
+                        It&apos;s more than a perk.<br />
                         <span className="inline-block bg-[#a6ff48] text-[#053d3d] px-4 py-2 mt-2 text-3xl md:text-4xl">
-                            It's a property performance strategy.
+                            It&apos;s a property performance strategy.
                         </span>
                     </motion.p>
                     <motion.p

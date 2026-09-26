@@ -68,13 +68,15 @@ export const CaseStudy: React.FC = () => {
         setCurrentIndex(index);
     };
 
-    // Auto-play functionality (optional - uncomment if desired)
+    // Auto-play functionality
     useEffect(() => {
         const interval = setInterval(() => {
-            goToNext();
+            setCurrentIndex((prevIndex) =>
+                prevIndex === images.length - 1 ? 0 : prevIndex + 1
+            );
         }, 3000);
         return () => clearInterval(interval);
-    }, [currentIndex]);
+    }, [images.length]);
 
     return (
         <section className="py-8 md:py-16 bg-[#F5FAF5]">
@@ -156,7 +158,7 @@ export const CaseStudy: React.FC = () => {
                             <br className="md:hidden" />
                             <span className="md:inline text-[#053d3d] font-bold text-2xl md:text-xl"> Class A Office Tower</span>
                             <p className="text-[#053d3d] text-lg md:text-lg mb-4 font-bold">
-                                "From Quiet Amenities to a Tenant Magnet"
+                                &ldquo;From Quiet Amenities to a Tenant Magnet&rdquo;
                             </p>
                         </div>
 
@@ -235,7 +237,7 @@ export const CaseStudy: React.FC = () => {
                             <div>
                                 <p className="text-[#053d3d] text-base mb-2">Increase in tenant<br /> satisfaction to</p>
                                 <div className="text-5xl md:text-6xl font-bold text-[#053d3d] mb-2">4.7 / 5</div>
-                                <p className="text-base">from from 3.7 on "overall<br />building experience"</p>
+                                <p className="text-base">from from 3.7 on &ldquo;overall<br />building experience&rdquo;</p>
                             </div>
                         </div>
 

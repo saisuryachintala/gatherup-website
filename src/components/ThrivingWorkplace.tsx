@@ -2,8 +2,6 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
-import { Button } from './Button';
 import { scrollReveal } from '@/utils/animations';
 
 export const ThrivingWorkplace: React.FC = () => {
@@ -21,7 +19,7 @@ export const ThrivingWorkplace: React.FC = () => {
                 animate={isInView ? "visible" : "hidden"}
             >
                 <h2 className="text-[#053d3d] font-bold text-lg mb-2 font-display">
-                    Let's bring your tenant experience to life, together.
+                    Let&apos;s bring your tenant experience to life, together.
                 </h2>
                 <p className="text-[#053d3d] text-xl font-display">
                     Foster connection, belonging, and engagement through <br /> tailored wellness programs that drive measurable property impact.

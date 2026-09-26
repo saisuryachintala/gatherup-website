@@ -68,7 +68,7 @@ export const CommercialBenefits: React.FC = () => {
                             </div>
                             <h3 className="text-xl md:text-2xl font-bold mb-3 text-[#a6ff48]">Amenity ROI</h3>
                             <p className="text-base md:text-lg leading-relaxed">
-                                We help you move from "nice gym and empty lounge" to activated spaces with regular programming, community moments, and measurable engagement.
+                                We help you move from &ldquo;nice gym and empty lounge&rdquo; to activated spaces with regular programming, community moments, and measurable engagement.
                             </p>
                         </motion.div>
                     </motion.div>

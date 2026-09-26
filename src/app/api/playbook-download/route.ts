@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import { Readable } from 'stream';
+import { getGoogleAuthClient } from '@/lib/google-auth';
 
 // Simple in-memory rate limiter (per IP, best-effort on serverless)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -22,24 +23,6 @@ function isRateLimited(ip: string): boolean {
 
 function validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function getAuthClient() {
-    const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-    const key = process.env.GOOGLE_PRIVATE_KEY;
-
-    if (!email || !key) {
-        throw new Error('Missing Google service account configuration');
-    }
-
-    return new google.auth.JWT({
-        email,
-        key: key.replace(/\\n/g, '\n'),
-        scopes: [
-            'https://www.googleapis.com/auth/spreadsheets',
-            'https://www.googleapis.com/auth/drive.readonly',
-        ],
-    });
 }
 
 // Helper to convert Node.js Readable to Web ReadableStream
@@ -110,7 +93,10 @@ export async function POST(request: NextRequest) {
             throw new Error('Missing Google configuration');
         }
 
-        const auth = getAuthClient();
+        const auth = getGoogleAuthClient([
+            'https://www.googleapis.com/auth/spreadsheets',
+            'https://www.googleapis.com/auth/drive.readonly',
+        ]);
         const sheets = google.sheets({ version: 'v4', auth });
         const tabName = process.env.GOOGLE_SHEET_TAB_NAME || 'Sheet1';
 

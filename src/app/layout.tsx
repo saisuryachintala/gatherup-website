@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
-import { Montserrat, Lato } from "next/font/google";
+import { DM_Sans, Montserrat, Lato, Outfit } from "next/font/google";
 import "./globals.css";
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+});
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -47,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${lato.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${lato.variable} ${outfit.variable} ${dmSans.variable}`}>
       <body className="antialiased" style={{ isolation: 'isolate' }}>
         {children}
       </body>

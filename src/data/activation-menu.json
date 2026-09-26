@@ -1,0 +1,539 @@
+{
+  "hero": "/assets/activation-menu/hero-yoga-lawn.jpg",
+  "logo": "/assets/activation-menu/gatherup-logo.png",
+  "activations": [
+    {
+      "slug": "yoga-on-the-lawn",
+      "name": "Yoga on the Lawn",
+      "category": "Health and Fitness",
+      "tagline": "A peaceful outdoor flow that turns your green space into a engagement anchor.",
+      "shortDescription": "A guided yoga session staged on the lawn, plaza, or courtyard, open to all levels.",
+      "experience": "We'll set up a calm, accessible yoga flow in your outdoor space, timed for mornings or lunch-hour energy. Our instructors bring the vibes and music; your team provides the space. We can make it a one-off or recurring ritual your community looks forward to and talks about.",
+      "whyItWorks": [
+        "Activates underused outdoor areas with minimal setup.",
+        "All-level instruction welcomes beginners and regulars.",
+        "Recurring sessions build habit and community over time."
+      ],
+      "image": "/assets/activation-menu/yoga-lawn-office-CnEjZC9l.jpg",
+      "related": [
+        "rooftop-yoga",
+        "stretch-and-sip"
+      ],
+      "additionalInspiration": [
+        "Theme each session to the season — a summer sunrise flow with cold towels, a fall gratitude flow with warm tea, or a moonlight stretch under string lights.",
+        "Add a beginner's corner with a roving instructor so first-timers get extra attention without slowing the main class.",
+        "Pair the flow with a five-minute guided breathing close, then hand out a small takeaway card with two poses tenants can repeat at their desks."
+      ]
+    },
+    {
+      "slug": "rooftop-yoga",
+      "name": "Rooftop Yoga",
+      "category": "Health and Fitness",
+      "tagline": "A calm, elevated start (or finish) to the workday your tenants will look forward to and plan around.",
+      "shortDescription": "A guided flow on your terrace or rooftop, scaled to any experience level.",
+      "experience": "A recurring or one-off yoga flow on your rooftop or terrace, sequenced for every level and timed around the building's rhythm. Music and instruction arrive with us; your team simply unlocks the door. The session becomes a reason for tenants to stay longer, build community and enjoy their time at the building.",
+      "whyItWorks": [
+        "Turns underused outdoor square footage into a signature amenity moment.",
+        "Low barrier to entry means first-timers participate alongside regulars.",
+        "Recurring cadence builds a habit, not a one-and-done activation."
+      ],
+      "image": "/assets/activation-menu/rooftop-yoga-skyline-AncOyFU5.jpg",
+      "related": [
+        "yoga-on-the-lawn",
+        "stretch-and-sip",
+        "group-fitness-classes"
+      ],
+      "additionalInspiration": [
+        "Anchor the series to the workday rhythm — a Tuesday 7:30 a.m. flow and a Thursday 5 p.m. sunset wind-down — so tenants build it into their calendar.",
+        "Offer a monthly 'guest pass' session where tenants bring a friend, partner, or client, quietly marketing the building to new people.",
+        "Upgrade the finale of each season with live acoustic music for one session and a post-class coffee cart for lingering conversation."
+      ]
+    },
+    {
+      "slug": "group-fitness-classes",
+      "name": "Group fitness classes",
+      "category": "Health and Fitness",
+      "tagline": "High-energy, accessible classes that give your fitness amenity a boost in usage.",
+      "shortDescription": "Coached group classes that make your fitness room feel alive and approachable.",
+      "experience": "We bring rotating class formats into your fitness center — from cardio and strength to low-impact options — led by top-notch professional instructors who meet tenants where they are. Scheduling, programming, and attendance tracking are handled end to end.",
+      "whyItWorks": [
+        "Converts existing fitness space into visible, measurable usage.",
+        "Group energy reduces the intimidation of working out alone.",
+        "Variety keeps the calendar fresh and participation high."
+      ],
+      "image": "/assets/activation-menu/group-fitness-high-fives-C7ChLmtX.jpg",
+      "related": [
+        "personal-training",
+        "fitness-center-orientations",
+        "stretch-and-sip"
+      ],
+      "additionalInspiration": [
+        "Rotate a monthly format calendar — HIIT, strength, low-impact mobility, dance cardio — and publish it so tenants plan around their favorites.",
+        "Run a six-week 'team challenge' where tenants log classes and the building with the most check-ins earns a catered celebration.",
+        "Offer a quarterly 'introductions week' with shortened, ultra-beginner versions of each class to pull in tenants who have never entered the fitness center."
+      ]
+    },
+    {
+      "slug": "stretch-and-sip",
+      "name": "Stretch & Sip",
+      "category": "Health and Fitness",
+      "tagline": "Gentle movement and a refreshing drink, served in one community-centered activation.",
+      "shortDescription": "A guided stretch session paired with a post-class smoothie or infused water moment.",
+      "experience": "Tenants move through a short, accessible mobility flow, then gather for curated drinks and casual conversations. It is part recovery, part social moment — and entirely low pressure.",
+      "whyItWorks": [
+        "Combines physical recovery with natural social interaction.",
+        "Low intensity invites people who avoid traditional fitness.",
+        "The drink pairing extends the experience and encourages lingering."
+      ],
+      "image": "/assets/activation-menu/stretch-sip-lawn-D1VlYz2H.jpg",
+      "related": [
+        "yoga-on-the-lawn",
+        "group-fitness-classes",
+        "smoothie-social"
+      ],
+      "additionalInspiration": [
+        "Move the pairing to match the session — cold-pressed juice after a morning mobility flow, infused water and sparkling options for midday, herbal tea for a late-afternoon wind-down.",
+        "Add a five-minute 'desk rescue' segment teaching three stretches tenants can do at their workstation, with a printed card to keep.",
+        "Host a monthly edition on a different floor or in the lobby so new tenants discover the program as the location travels."
+      ]
+    },
+    {
+      "slug": "personal-training",
+      "name": "Personal Training",
+      "category": "Health and Fitness",
+      "tagline": "One-on-one, easy to schedule coaching that makes your fitness amenity feel premium.",
+      "shortDescription": "Private training sessions booked in your building's fitness center.",
+      "experience": "Certified trainers work with your tenants or residents on their individual goals inside your existing fitness space. We handle scheduling, billing coordination, and trainer vetting so the program runs without burdening your team.",
+      "whyItWorks": [
+        "Adds a high-value service to underused fitness equipment.",
+        "Personal attention justifies the amenity in renewal conversations.",
+        "Flexible scheduling fits around tenant workdays."
+      ],
+      "image": "/assets/activation-menu/personal-training-CFp-i2pe.jpg",
+      "related": [
+        "group-fitness-classes",
+        "fitness-center-orientations",
+        "stretch-and-sip"
+      ],
+      "additionalInspiration": [
+        "Offer short 'taster' slots — two 20-minute intro sessions — so hesitant tenants can try coaching without committing to a package.",
+        "Run small-group semi-private training at a lower price point for colleagues who want to train together, building cross-tenant friendships.",
+        "Add quarterly goal check-ins with simple progress snapshots, turning one-off sessions into an ongoing program tenants renew."
+      ]
+    },
+    {
+      "slug": "fitness-center-orientations",
+      "name": "Fitness Center Orientations",
+      "category": "Health and Fitness",
+      "tagline": "The first step that turns a room full of equipment into amenity usage.",
+      "shortDescription": "Scheduled orientations that teach tenants how to use your fitness center safely and confidently.",
+      "experience": "A trained fitness coach guides small groups through the onsite equipment, etiquette, and a simple starter workout. By removing uncertainty, this turns hesitant tenants and residents into regular users while protecting your investment in the space.",
+      "whyItWorks": [
+        "Removes the intimidation barrier that keeps most tenants out of the gym.",
+        "Creates measurable usage lift in an existing amenity.",
+        "Positions the building as attentive and service-forward."
+      ],
+      "image": "/assets/activation-menu/office-fitness-center-glqaXph6.jpg",
+      "related": [
+        "personal-training",
+        "group-fitness-classes",
+        "stretch-and-sip"
+      ],
+      "additionalInspiration": [
+        "Schedule orientations at arrival-time windows and lunch hours so the widest range of tenants can attend without changing their day.",
+        "Send each attendee home with a one-page starter plan keyed to the building's actual equipment, not a generic handout.",
+        "Follow up two weeks later with a drop-in 'refresher hour' where the coach answers questions and troubleshoots form on the floor."
+      ]
+    },
+    {
+      "slug": "smoothie-social",
+      "name": "Smoothie Social",
+      "category": "Pop-Ups",
+      "tagline": "A pop-up activation that turns strangers into neighbors.",
+      "shortDescription": "A staffed smoothie bar placed in the lobby at peak traffic.",
+      "experience": "We set a fresh smoothie bar in the lobby or amenity floor during the busiest hour, with staff who keep the line moving and conversation going. Simple, generous, and repeatable.",
+      "whyItWorks": [
+        "Food in a shared space is the most reliable way to create conversation.",
+        "Lobby placement reaches tenants who never book programming.",
+        "Cheap to repeat, which is what makes a calendar feel alive."
+      ],
+      "image": "/assets/activation-menu/smoothie-social-lobby-CgZgfepV.jpg",
+      "related": [
+        "coffee-connection"
+      ],
+      "additionalInspiration": [
+        "Theme the menu to the moment — a tropical lineup to kick off summer, a 'pink day' for a cause, or a build-your-own topping bar for extra engagement.",
+        "Stage a 'name that smoothie' vote where tenants pick next month's feature blend, giving them a small stake in the program.",
+        "Pair the bar with a two-minute welcome from the property team, turning a treat into a touchpoint for renewals and announcements."
+      ]
+    },
+    {
+      "slug": "coffee-connection",
+      "name": "Coffee + Connection",
+      "category": "Pop-Ups",
+      "tagline": "The morning ritual that makes the commute worth it.",
+      "shortDescription": "A barista pop-up staged during the morning arrival window.",
+      "experience": "A specialty barista team serves the lobby through the arrival rush. We handle staffing, supply, and flow so your team only announces it. Recurring dates give tenants a reason to come in on the days you want them in.",
+      "whyItWorks": [
+        "Directly supports in-office attendance targets tenants are chasing.",
+        "Creates unforced cross-company conversation in the queue.",
+        "Highly visible to prospects touring the building."
+      ],
+      "image": "/assets/activation-menu/coffee-connection-cart-DDy5dx8m.jpg",
+      "related": [
+        "smoothie-social"
+      ],
+      "additionalInspiration": [
+        "Target the days attendance matters most — Tuesday through Thursday mornings — so the perk directly supports in-office targets.",
+        "Add a rotating 'local roast' spotlight with a card about the roaster, tying the perk to the neighborhood story.",
+        "Once a month, invite a tenant company to co-host and greet the line, turning a coffee queue into cross-company introductions."
+      ]
+    },
+    {
+      "slug": "put-put-and-popsicles",
+      "name": "Put-Put & Treats",
+      "category": "Pop-Ups",
+      "tagline": "A playful outdoor afternoon that lowers the barrier to community.",
+      "shortDescription": "A mini-golf pop-up paired with frozen treats for tenants and their guests.",
+      "experience": "We transform a lawn, terrace, or unused plaza into a casual nine-hole putting course, complete with snacks and drinks. Staff keep the games moving and the treats stocked. It is low-commitment fun that gets people up from their desks and chatting.",
+      "whyItWorks": [
+        "Games create instant conversation between tenants who rarely cross paths.",
+        "Treats make the activation feel generous and friendly.",
+        "Outdoor setup turns underused property space into a lively amenity moment."
+      ],
+      "image": "/assets/activation-menu/put-put-lawn-residential-BItdk9xq.jpg",
+      "related": [
+        "mutts-and-mocktails",
+        "screen-on-the-green"
+      ],
+      "additionalInspiration": [
+        "Build the nine holes around the property itself — one hole on the plaza, one along the lobby glass, one on the lawn — turning a game into a building tour.",
+        "Run a lightning leaderboard with a small prize for the day's best score, and post the winning team on the lobby screen for friendly rivalry.",
+        "Add a twilight edition with string lights and glowing hole markers for an after-work crowd that skips the midday heat."
+      ]
+    },
+    {
+      "slug": "mutts-and-mocktails",
+      "name": "Mutts and Mocktails",
+      "category": "Pop-Ups",
+      "tagline": "A pet-friendly social hour that brings the whole building together.",
+      "shortDescription": "An after-work gathering with crafted non-alcoholic drinks and space for tenants to mingle with their dogs.",
+      "experience": "We set up a relaxed lounge on the lawn or lobby plaza with a mocktail station, water bowls, treats, and a few dog-friendly touches in partnership with a local shelter. Tenants stop by on their way out of the office, stay longer than expected, and leave with new neighbours.",
+      "whyItWorks": [
+        "Pets are a natural icebreaker across companies and floors.",
+        "Mocktails keep the event inclusive and workplace-appropriate.",
+        "The after-work timing catches tenants before they head home."
+      ],
+      "image": "/assets/activation-menu/mutts-mocktails-lawn-C3I7xGXc.jpg",
+      "related": [
+        "put-put-and-popsicles",
+        "wine-down-wednesdays"
+      ],
+      "additionalInspiration": [
+        "Invite a local shelter to bring adoptable dogs and a donation bin, adding a feel-good layer to the social hour.",
+        "Set up a pet portrait corner with a phone-friendly backdrop so tenants leave with a shareable photo of their pup.",
+        "Give the event a seasonal spin — a spring 'puppy promenade,' a summer 'frosty paws' frozen-treat bar, or a fall costume parade."
+      ]
+    },
+    {
+      "slug": "wine-down-wednesdays",
+      "name": "Wine Down Wednesdays",
+      "category": "Pop-Ups",
+      "tagline": "A midweek pause that gives tenants a reason to stay a little longer.",
+      "shortDescription": "A curated wine-tasting or beverage social held in the lobby or amenity lounge on Wednesday evenings.",
+      "experience": "We bring in a small tasting selection, simple pairings, and a host who keeps the mood light. The event runs for a couple of hours so tenants can drop in after work without a hard commitment. It can become a recurring ritual that breaks up the week.",
+      "whyItWorks": [
+        "Midweek timing fills a natural lull in the tenant calendar.",
+        "A hosted tasting feels elevated without requiring a large budget.",
+        "Recurring format builds anticipation and regular attendance."
+      ],
+      "image": "/assets/activation-menu/wine-down-lobby-bass-C6wdX0jh.jpg",
+      "related": [
+        "coffee-connection",
+        "mutts-and-mocktails"
+      ],
+      "additionalInspiration": [
+        "Vary the format monthly — a guided tasting with a sommelier, a make-your-own spritz bar, or a regional spotlight — so regulars keep coming back.",
+        "Keep a zero-proof pairing menu equally curated, so non-drinkers get the same elevated experience.",
+        "Close the season with a 'guest's choice' evening where tenants vote on the lineup, rewarding the ritual with ownership."
+      ]
+    },
+    {
+      "slug": "screen-on-the-green",
+      "name": "Screen on the Green",
+      "category": "Pop-Ups",
+      "tagline": "A movie evening that turns any property into a community destination.",
+      "shortDescription": "An outdoor screening on the lawn or plaza, complete with seating, snacks, and a family-friendly lineup.",
+      "experience": "We project a crowd-pleasing film on the green, set out blankets and low seating, and run delicious snack stations. Tenants bring friends and family, spread out, and stay for the whole feature. It is the largest-format social moment on the menu.",
+      "whyItWorks": [
+        "Outdoor movies draw attendance from tenants who skip typical programming.",
+        "Family-friendly format extends the invite beyond the workday.",
+        "The event produces shareable moments that reinforce the building's community."
+      ],
+      "image": "/assets/activation-menu/screen-on-the-green-lawn-DM9pXrTT.jpg",
+      "related": [
+        "put-put-and-popsicles"
+      ],
+      "additionalInspiration": [
+        "Let tenants vote on the film lineup a week ahead, then reveal the winner the day of — anticipation drives attendance.",
+        "Layer in a pre-show picnic hour with food vendors or a snack bar, so families arrive early and stay through the credits.",
+        "Provide low chairs, blankets, and a kids' corner up front so the event genuinely works for every age in the building."
+      ]
+    },
+    {
+      "slug": "botanical-bookmark-making",
+      "name": "Botanical Bookmark Making",
+      "category": "Pop-Ups",
+      "tagline": "Press flowers and foliage into a keepsake bookmark.",
+      "shortDescription": "A quiet, hands-on station where tenants create botanical bookmarks.",
+      "experience": "We set out pressed flowers, leaves, and archival papers. Tenants arrange their own compositions, seal them, and leave with a bookmark that brings a small piece of nature back to their desk. Perfect for a small group or in-lobby activation.",
+      "whyItWorks": [
+        "Low-pressure creative entry point for any tenant.",
+        "Finished item is personal and immediately useful.",
+        "Natural materials reinforce calm and seasonal relevance."
+      ],
+      "image": "/assets/activation-menu/botanical-bookmark-flowers-DetCCfKQ.jpg",
+      "related": [
+        "personalized-journals",
+        "vision-board-workshop",
+        "micro-terrarium-making"
+      ],
+      "additionalInspiration": [
+        "Offer seasonal material kits — spring blossoms, autumn leaves, winter evergreens — so repeat participants get a new palette each time.",
+        "Add a hand-lettering station where tenants add a favorite quote or the building name to their finished bookmark.",
+        "Once a year, run a 'gift edition' where tenants make two bookmarks — one to keep and one to leave in the building's book-swap shelf."
+      ]
+    },
+    {
+      "slug": "mosaic-bar",
+      "name": "Mosaic Bar",
+      "category": "Pop-Ups",
+      "tagline": "Arrange color and texture into a small tiled piece. \nPerfect of a group or in-lobby pop-up. ",
+      "shortDescription": "A guided mosaic-making bar for tenants to build a coaster, frame, or small tray.",
+      "experience": "We provide tiles, adhesives, grout, and templates. Tenants choose a pattern, assemble their piece, and take it home after a quick drying window. It is tactile, satisfying, and easy to drop into.",
+      "whyItWorks": [
+        "Process-oriented activity keeps people present and chatting.",
+        "Take-home object extends the experience.",
+        "Scales well from lobby pop-up to amenity floor takeover."
+      ],
+      "image": "/assets/activation-menu/mosaic-bar-bright-tiles-CYpFuhoJ.jpg",
+      "related": [
+        "charm-bar",
+        "sip-and-paint"
+      ],
+      "additionalInspiration": [
+        "Provide pattern templates at three difficulty levels so total beginners and craft veterans both stay engaged.",
+        "Offer a seasonal project shape — coasters in summer, trivets before the holidays, small frames in spring — to keep the format returning.",
+        "Set up a shared 'community mosaic' panel that tenants each add a few tiles to across events, then install it permanently in the lobby."
+      ]
+    },
+    {
+      "slug": "charm-bar",
+      "name": "Charm Bar",
+      "category": "Pop-Ups",
+      "tagline": "Build a charm bracelet, pen or keychain that tells a small story and empowers your tenants' creativity. ",
+      "shortDescription": "A jewelry-style charm bar where tenants mix metals, beads, and tokens into a personal accessory.",
+      "experience": "Tenants browse curated charms and beads, then assemble a bracelet or keychain with guidance on hand. The result is wearable, giftable, and a quiet reminder of the building's commitment to tenant engagement.",
+      "whyItWorks": [
+        "Personalized output makes every guest feel seen.",
+        "Compact setup fits almost any common area.",
+        "Finished pieces spark conversation back at desks and on social channels."
+      ],
+      "image": "/assets/activation-menu/charm-bar-assembly-table-CcSLP5qJ.jpg",
+      "related": [
+        "mosaic-bar",
+        "personalized-journals",
+        "sip-and-paint"
+      ],
+      "additionalInspiration": [
+        "Curate charm collections that tell stories — travel tokens, birthstones, initials, tiny career symbols — so each piece feels personal.",
+        "Offer a 'gift mode' with complimentary wrapping for tenants making pieces for someone else, doubling the event's reach.",
+        "Photograph finished pieces on a styled mini backdrop and share a collage (with permission) to build buzz for the next session."
+      ]
+    },
+    {
+      "slug": "vision-board-workshop",
+      "name": "DIY Vision Board Creation",
+      "category": "Pop-Ups",
+      "tagline": "Turn intentions into a visual plan for the quarter ahead.",
+      "shortDescription": "A guided session for creating personal or professional vision boards.",
+      "experience": "We supply magazines, printed quotes, scissors, glue, and boards. A facilitator leads a short reflection, then tenants build collages around goals for the season. It is introspective without being heavy. Great for groups or in-lobby pop-up. ",
+      "whyItWorks": [
+        "Goal-setting content feels useful at the start of a quarter.",
+        "Visual output keeps intentions visible long after the event.",
+        "Group format creates gentle accountability and connection."
+      ],
+      "image": "/assets/activation-menu/vision-board-conference-room-BpM8ApVx.jpg",
+      "related": [
+        "botanical-bookmark-making"
+      ],
+      "additionalInspiration": [
+        "Run it quarterly with a themed prompt — one quarter career, one travel, one home and wellbeing — so boards stay specific.",
+        "Open with a 10-minute guided reflection so boards come from intention rather than random magazine collage.",
+        "Invite participants to photograph their board and set it as a phone lock screen, keeping the goals visible daily."
+      ]
+    },
+    {
+      "slug": "sip-and-paint",
+      "name": "Sip & Paint",
+      "category": "Pop-Ups",
+      "tagline": "A relaxed evening of painting, sipping, and socializing.",
+      "shortDescription": "A guided paint night with non-alcoholic refreshments in a casual setting.",
+      "experience": "An instructor walks tenants through a simple canvas composition while they sip curated mocktails, sparkling water, or tea. No experience is needed; the focus is on unwinding, not mastery.",
+      "whyItWorks": [
+        "Low-skill creative format removes intimidation.",
+        "Built-in social atmosphere strengthens tenant relationships.",
+        "Produces shareable artwork tenants display in their spaces."
+      ],
+      "image": "/assets/activation-menu/sip-paint-lobby-CiI7_-Xa.jpg",
+      "related": [
+        "wine-down-wednesdays",
+        "mosaic-bar"
+      ],
+      "additionalInspiration": [
+        "Rotate painting subjects with the season — a skyline at sunset in summer, a cozy interior in winter — so repeat attendees stay interested.",
+        "Offer a 'paint your pet' or 'paint your neighborhood' edition once a season for a personal, high-signup twist.",
+        "Display finished canvases in a temporary lobby gallery for a week, turning the event into a building-wide moment."
+      ]
+    },
+    {
+      "slug": "micro-terrarium-making",
+      "name": "Micro Terrarium Making",
+      "category": "Pop-Ups",
+      "tagline": "Build a self-contained world in glass, perfectly sized for the desk or home counter. Great for groups or as an in-lobby pop-up. ",
+      "shortDescription": "A hands-on terrarium workshop where tenants layer soil, moss, and tiny plants into a sealed or open vessel.",
+      "experience": "We guide tenants through layering drainage, soil, moss, and miniature plants inside a glass container. Each terrarium becomes a small living object for a desk or shelf, with care instructions included.",
+      "whyItWorks": [
+        "Layering process is meditative and satisfying.",
+        "Living piece keeps the activation visible for months.",
+        "Small-group format encourages natural conversation."
+      ],
+      "image": "/assets/activation-menu/micro-terrarium-lobby-D8uH6vKI.jpg",
+      "related": [
+        "botanical-bookmark-making",
+        "personalized-journals",
+        "sip-and-paint"
+      ],
+      "additionalInspiration": [
+        "Offer two vessel styles — a sealed moss globe and an open desert scene — so participants choose their own aesthetic.",
+        "Add tiny figurines, colored sand, and stones so each terrarium becomes a miniature landscape with a story.",
+        "Run a winter 'bring one as a gift' edition with wrapping materials, turning the workshop into holiday preparation."
+      ]
+    },
+    {
+      "slug": "personalized-journals",
+      "name": "Personalized, Bedazzled Journals",
+      "category": "Pop-Ups",
+      "tagline": "Design a journal cover that feels like yours.",
+      "shortDescription": "A creative station for customizing journals with stamps, patches, foil, and color.",
+      "experience": "Tenants choose a blank journal and embellish the cover with stamps, fabric patches, foil accents, and hand-lettered labels. It turns a simple notebook into a personal planning companion. Perfect for a small group or in-lobby activation.",
+      "whyItWorks": [
+        "Useful object gets daily visibility after the event.",
+        "Creative freedom makes every journal unique.",
+        "Pairs naturally with goal-setting and productivity programming."
+      ],
+      "image": "/assets/activation-menu/bedazzled-journals-lobby-DEuOe5Bf.jpg",
+      "related": [
+        "vision-board-workshop"
+      ],
+      "additionalInspiration": [
+        "Provide stamp stations, washi tape, and foil accents in a rotating palette so each event offers new design options.",
+        "Include a first-page prompt — goals, gratitude, or a reading list — so the journal starts working on day one.",
+        "Pair a session with the Goal Setting Workshop so tenants customize the journal they'll use to track their new plan."
+      ]
+    },
+    {
+      "slug": "pumpkin-decorating",
+      "name": "Pumpkin Decorating",
+      "category": "Autumn Inspired",
+      "tagline": "A playful fall pop-up that puts a little creativity on every desk.",
+      "shortDescription": "A decorate-your-own pumpkin station stocked with paint, embellishments, and autumn charm.",
+      "experience": "We set up a long decorating table with mini pumpkins, paint, markers, ribbon, and plenty of glitter-adjacent temptation. Tenants drop in on their schedule, decorate at their own pace, and carry their finished pumpkin back to their desk as a small seasonal keepsake. It works beautifully as a one-day lobby pop-up or a recurring October tradition.",
+      "whyItWorks": [
+        "Zero skill required, so every tenant can join without hesitation.",
+        "Take-home output keeps the activation visible long after the event.",
+        "Drop-in format fits any schedule — five minutes or an hour."
+      ],
+      "image": "/assets/activation-menu/pumpkin-decorating-BP7dxiot.jpg",
+      "related": [
+        "diy-centerpiece-making",
+        "gratitude-walls",
+        "botanical-bookmark-making"
+      ],
+      "additionalInspiration": [
+        "Offer two decorating tracks — paint and markers for a quick lunchtime pop, or full craft supplies with stencils, decoupage, and ribbon for a slower sit-down session.",
+        "Run a 'best pumpkin' friendly vote at day's end with a small prize, and photograph the winners for the building's screens.",
+        "Add a 'pumpkins for the front desk' option where tenants decorate a few extra to dress the lobby for the rest of the season."
+      ]
+    },
+    {
+      "slug": "diy-savory-spice-bar",
+      "name": "DIY Savory Spice Bar",
+      "category": "Autumn Inspired",
+      "tagline": "Blend a signature spice mix and take the flavor of the season home.",
+      "shortDescription": "A guided spice-blending bar where tenants mix, label, and jar their own savory blends.",
+      "experience": "We stage a bar of individual spices — smoky paprika, dried herbs, warm fall blends — with scoops, recipes, and kraft labels. A host guides tenants through blending their own savory jar, with tested recipe cards for everything from roasted vegetables to weeknight pasta. Everyone leaves with a labeled jar and a reason to cook that night.",
+      "whyItWorks": [
+        "Food programming reliably draws a crowd and sparks conversation.",
+        "A usable, giftable take-home extends the experience for weeks.",
+        "Recipe cards give hesitant cooks an easy on-ramp."
+      ],
+      "image": "/assets/activation-menu/diy-savory-spice-bar-DHtINp1I.jpg",
+      "related": [
+        "diy-centerpiece-making"
+      ],
+      "additionalInspiration": [
+        "Curate the blends to the season — a smoky BBQ mix in early fall, a warm roasting blend for November, and a gifting-ready jar in December.",
+        "Include blank recipe cards so tenants can name and share their own creations, with a running 'building favorites' board of past blends.",
+        "Pair the bar with a small tasting table where one staff-made dish uses the featured blend, so tenants taste before they blend."
+      ]
+    },
+    {
+      "slug": "gratitude-walls",
+      "name": "Gratitude Walls",
+      "category": "Autumn Inspired",
+      "tagline": "A simple wall that turns individual thanks into a building-wide moment.",
+      "shortDescription": "An interactive lobby wall where tenants post handwritten notes of gratitude throughout the season.",
+      "experience": "We install a large, beautifully framed gratitude wall in a high-traffic lobby with notes, pens, and a gentle prompt. Tenants add what they're thankful for — big or small — and watch the wall fill over days and weeks. It can run quietly for a season or anchor a specific week of programming, ending with a shared photo of the finished wall.",
+      "whyItWorks": [
+        "Participation takes two minutes, so everyone can contribute.",
+        "The growing wall becomes a daily visual moment in the lobby.",
+        "Gratitude content is warm, inclusive, and photographable for the community story."
+      ],
+      "image": "/assets/activation-menu/gratitude-walls-tMj9RiAM.jpg",
+      "related": [
+        "pumpkin-decorating",
+        "diy-centerpiece-making"
+      ],
+      "additionalInspiration": [
+        "Theme the prompts by week — colleagues, small wins, the neighborhood — so the wall stays fresh for tenants who pass it daily.",
+        "Offer a photo-free quiet hour option and a 'just for me' note format so participation never feels performative.",
+        "Close the season by compiling a printed or digital keepsake of anonymized notes to share with the whole building."
+      ]
+    },
+    {
+      "slug": "diy-centerpiece-making",
+      "name": "DIY Centerpiece Making",
+      "category": "Autumn Inspired",
+      "tagline": "Seasonal florals and textures, arranged by hand into a centerpiece to keep.",
+      "shortDescription": "A hands-on floral workshop where tenants build their own autumn centerpiece.",
+      "experience": "A floral instructor walks tenants through building a seasonal centerpiece from mini pumpkins, dried grasses, eucalyptus, and autumn blooms. We supply everything — vessels, stems, clippers, and guidance — so each person leaves with a finished arrangement ready for their table or a holiday gathering. It runs as a seated workshop or a drop-in station.",
+      "whyItWorks": [
+        "Guided instruction makes a beautiful result achievable for anyone.",
+        "The finished centerpiece is genuinely useful heading into the holidays.",
+        "Working side by side with flowers creates easy, natural conversation."
+      ],
+      "image": "/assets/activation-menu/diy-centerpiece-making-Co_opET-.jpg",
+      "related": [
+        "pumpkin-decorating",
+        "micro-terrarium-making",
+        "diy-savory-spice-bar"
+      ],
+      "additionalInspiration": [
+        "Offer two vessel styles — a low rustic compote and a bud-vase trio — so the finished piece fits a coffee table or a holiday dinner table.",
+        "Add a candle and dried-citrus accents bar so each centerpiece can be finished with scent and color.",
+        "Time a 'friendsgiving edition' in mid-November where tenants build two smaller arrangements — one to keep and one to gift."
+      ]
+    }
+  ]
+}

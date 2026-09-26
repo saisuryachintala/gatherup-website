@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
     const headerRef = useRef<HTMLElement>(null);
     const pathname = usePathname();
 
-    const isActive = (path: string) => pathname === path;
+    const isActive = (path: string) => pathname === path || pathname.startsWith(`${path}/`);
     const isSolutionsActive = () => pathname === '/our-commercial-solutions' || pathname === '/our-residential-solutions';
 
     // Measure header height dynamically
@@ -196,6 +196,19 @@ export const Header: React.FC = () => {
                                 )}
                             </div>
                             <Link
+                                href="/activation-menu"
+                                className={`transition-all duration-500 ease-in-out ${isActive('/activation-menu')
+                                    ? 'text-[#a6ff48] font-bold'
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.05rem',
+                                    transition: 'color 0.5s ease-in-out, font-size 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                            >
+                                Activation Menu
+                            </Link>
+                            <Link
                                 href="/why-it-matters"
                                 className={`transition-all duration-500 ease-in-out ${isActive('/why-it-matters')
                                     ? 'text-[#a6ff48] font-bold'
@@ -342,6 +355,21 @@ export const Header: React.FC = () => {
                                     </div>
                                 )}
                             </div>
+                            <Link
+                                href="/activation-menu"
+                                className={`py-2 ${isActive('/activation-menu')
+                                    ? 'text-[#a6ff48] '
+                                    : 'text-white hover:text-[#a6ff48] font-normal'
+                                    }`}
+                                style={{
+                                    fontSize: '1.125rem',
+                                    fontWeight: isActive('/activation-menu') ? '600' : '400',
+                                    transition: 'color 0.5s ease-in-out, font-weight 0.5s ease-in-out, filter 0.5s ease-in-out'
+                                }}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Activation Menu
+                            </Link>
                             <Link
                                 href="/why-it-matters"
                                 className={`py-2 ${isActive('/why-it-matters')

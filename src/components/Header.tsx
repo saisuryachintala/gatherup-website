@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
             setMobileMenuOpen(false);
             setSolutionsDropdownOpen(false);
             setActivationDropdownOpen(false);
-            setLastScrollY(window.scrollY);
+            //setLastScrollY(window.scrollY);
         });
 
         return () => window.cancelAnimationFrame(frame);
@@ -278,7 +278,7 @@ export const Header: React.FC = () => {
                             >
                                 Why it Matters
                             </Link>
-                            <Link
+                            {/* <Link
                                 href="/playbook"
                                 className={`transition-all duration-500 ease-in-out ${isActive('/playbook')
                                     ? 'text-[#a6ff48] font-bold'
@@ -301,7 +301,7 @@ export const Header: React.FC = () => {
                                 }}
                             >
                                 Playbook v2
-                            </Link>
+                            </Link> */}
                             <Link
                                 href="/about-us"
                                 className={`transition-all duration-500 ease-in-out ${isActive('/about-us')
@@ -518,7 +518,7 @@ export const Header: React.FC = () => {
                             >
                                 Why it Matters
                             </Link>
-                            <Link
+                            {/* <Link
                                 href="/playbook"
                                 className={`py-2 ${isActive('/playbook')
                                     ? 'text-[#a6ff48] '
@@ -547,7 +547,7 @@ export const Header: React.FC = () => {
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Playbook v2
-                            </Link>
+                            </Link> */}
                             <Link
                                 href="/about-us"
                                 className={`py-2 ${isActive('/about-us')

@@ -15,7 +15,7 @@ export default function CommercialSolutions() {
         <motion.main
             className="min-h-screen bg-white overflow-x-hidden"
             variants={pageLoad}
-            initial="hidden"
+            initial={false}
             animate="visible"
         >
             <Header />

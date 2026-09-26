@@ -13,18 +13,12 @@ export function ActivationCard({ activation }: { activation: Activation }) {
   return (
     <article className="am-card">
       <div className="am-card__image">
-        <Link
-          href={`/activation-menu/activations/${activation.slug}`}
-          aria-label={`View ${activation.name}`}
-          tabIndex={-1}
-        >
-          <Image
-            src={activation.image}
-            alt={activation.name}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-        </Link>
+        <Image
+          src={activation.image}
+          alt={activation.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
         <button
           className={`am-save-button${saved ? " is-saved" : ""}`}
           type="button"
@@ -40,14 +34,18 @@ export function ActivationCard({ activation }: { activation: Activation }) {
         <p className="am-eyebrow">{activation.category}</p>
         <h2>{activation.name}</h2>
         <p className="am-card__description">{activation.shortDescription}</p>
-        <Link
-          href={`/activation-menu/activations/${activation.slug}`}
-          className="am-card__link"
-        >
+        <span className="am-card__link">
           View {activation.name}
           <MoveRight aria-hidden="true" size={17} />
-        </Link>
+        </span>
       </div>
+      <Link
+        href={`/activation-menu/activations/${activation.slug}`}
+        className="am-card__overlay-link"
+        aria-label={`View ${activation.name}`}
+      >
+        <span className="sr-only">View {activation.name}</span>
+      </Link>
     </article>
   );
 }

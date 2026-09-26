@@ -3,9 +3,11 @@
 import {
   createContext,
   useCallback,
+  useEffect,
   useContext,
   useMemo,
-  useSyncExternalStore,
+  useRef,
+  useState,
   type ReactNode,
 } from "react";
 
@@ -20,23 +22,6 @@ interface WishlistContextValue {
 }
 
 const WishlistContext = createContext<WishlistContextValue | undefined>(undefined);
-
-function subscribeToWishlist(callback: () => void) {
-  window.addEventListener("storage", callback);
-  window.addEventListener(CHANGE_EVENT, callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener(CHANGE_EVENT, callback);
-  };
-}
-
-function getWishlistSnapshot() {
-  return window.localStorage.getItem(STORAGE_KEY);
-}
-
-function getServerWishlistSnapshot() {
-  return null;
-}
 
 function readWishlist(storedWishlist: string | null): string[] {
   if (!storedWishlist) {
@@ -56,30 +41,68 @@ function readWishlist(storedWishlist: string | null): string[] {
   return [];
 }
 
+function readStoredWishlist() {
+  try {
+    return readWishlist(window.localStorage.getItem(STORAGE_KEY));
+  } catch (error) {
+    console.error("The saved activation wishlist could not be accessed.", error);
+    return [];
+  }
+}
+
 function writeWishlist(slugs: string[]) {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(slugs));
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(slugs));
+  } catch (error) {
+    console.error("The saved activation wishlist could not be saved.", error);
+    return;
+  }
+
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
 export function WishlistProvider({ children }: { children: ReactNode }) {
-  const storedWishlist = useSyncExternalStore(
-    subscribeToWishlist,
-    getWishlistSnapshot,
-    getServerWishlistSnapshot,
-  );
-  const savedSlugs = useMemo(() => readWishlist(storedWishlist), [storedWishlist]);
+  const [savedSlugs, setSavedSlugs] = useState<string[]>([]);
+  const savedSlugsRef = useRef(savedSlugs);
+
+  useEffect(() => {
+    const syncWishlist = () => {
+      const nextSlugs = readStoredWishlist();
+      savedSlugsRef.current = nextSlugs;
+      setSavedSlugs(nextSlugs);
+    };
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === null || event.key === STORAGE_KEY) {
+        syncWishlist();
+      }
+    };
+
+    window.addEventListener("storage", handleStorage);
+    window.addEventListener(CHANGE_EVENT, syncWishlist);
+    syncWishlist();
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener(CHANGE_EVENT, syncWishlist);
+    };
+  }, []);
 
   const toggleSaved = useCallback((slug: string) => {
-    const current = readWishlist(getWishlistSnapshot());
-    writeWishlist(
-      current.includes(slug)
-        ? current.filter((saved) => saved !== slug)
-        : [...current, slug],
-    );
+    const current = savedSlugsRef.current;
+    const nextSlugs = current.includes(slug)
+      ? current.filter((saved) => saved !== slug)
+      : [...current, slug];
+
+    savedSlugsRef.current = nextSlugs;
+    setSavedSlugs(nextSlugs);
+    writeWishlist(nextSlugs);
   }, []);
 
   const removeSaved = useCallback((slug: string) => {
-    writeWishlist(readWishlist(getWishlistSnapshot()).filter((saved) => saved !== slug));
+    const nextSlugs = savedSlugsRef.current.filter((saved) => saved !== slug);
+    savedSlugsRef.current = nextSlugs;
+    setSavedSlugs(nextSlugs);
+    writeWishlist(nextSlugs);
   }, []);
 
   const value = useMemo<WishlistContextValue>(

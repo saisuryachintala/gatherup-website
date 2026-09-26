@@ -141,7 +141,6 @@
   position: relative;
   width: 100%;
   height: clamp(280px, 49vw, 640px);
-  margin-top: 72px;
   overflow: hidden;
   background: var(--am-wash);
 }
@@ -331,7 +330,7 @@
 .am-wishlist-shortcut {
   position: fixed;
   z-index: 40;
-  right: max(1rem, calc((100vw - var(--am-container-width)) / 2 + 2rem));
+  right: max(var(--am-gutter), calc((100vw - var(--am-container-width)) / 2 + var(--am-gutter)));
   bottom: 28px;
   min-height: 44px;
   display: inline-flex;
@@ -480,7 +479,7 @@
 }
 
 .am-related {
-  padding: 0 0 100px;
+  padding-block: 0 100px;
 }
 
 .am-related > h2 {
@@ -834,7 +833,7 @@
   }
 
   .am-wishlist-shortcut {
-    right: 16px;
+    right: var(--am-gutter);
     bottom: 16px;
     min-height: 44px;
     gap: 9px;

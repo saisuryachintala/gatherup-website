@@ -474,7 +474,7 @@ export const Header: React.FC = () => {
                                         >
                                             Wishlist ({savedSlugs.length})
                                         </Link>
-                                        <span className="pt-2 text-xs font-semibold uppercase tracking-widest text-white/70">
+                                        {/* <span className="pt-2 text-xs font-semibold uppercase tracking-widest text-white/70">
                                             FAQ
                                         </span>
                                         {FAQ_PAGES.map((page) => (
@@ -489,7 +489,7 @@ export const Header: React.FC = () => {
                                             >
                                                 {page.title}
                                             </Link>
-                                        ))}
+                                        ))} */}
                                     </div>
                                 )}
                             </div>

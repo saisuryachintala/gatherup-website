@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { ACTIVATIONS } from "@/data/activation-menu";
 import { ActivationCard } from "./ActivationCard";
 import { useWishlist } from "./WishlistProvider";
@@ -174,6 +175,39 @@ export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolea
   );
 }
 
+export function WishlistSubmitDisclosure() {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 600px)");
+    const updateViewport = () => {
+      setIsSmallScreen(mediaQuery.matches);
+      setIsOpen(!mediaQuery.matches);
+    };
+
+    updateViewport();
+    mediaQuery.addEventListener("change", updateViewport);
+    return () => mediaQuery.removeEventListener("change", updateViewport);
+  }, []);
+
+  return (
+    <details
+      className="am-wishlist-submit"
+      open={!isSmallScreen || isOpen}
+      onToggle={(event) => {
+        if (isSmallScreen) setIsOpen(event.currentTarget.open);
+      }}
+    >
+      <summary>
+        Submit wishlist
+        <ArrowRight aria-hidden="true" size={20} />
+      </summary>
+      <WishlistSubmissionForm embedded />
+    </details>
+  );
+}
+
 export function WishlistPage() {
   const { savedSlugs } = useWishlist();
   const savedActivations = ACTIVATIONS.filter((activation) => savedSlugs.includes(activation.slug));
@@ -191,7 +225,7 @@ export function WishlistPage() {
         {savedActivations.length > 0 ? (
           <div className="am-grid">
             {savedActivations.map((activation) => (
-              <ActivationCard activation={activation} key={activation.slug} />
+              <ActivationCard activation={activation} key={activation.slug} view="My Wishlist" />
             ))}
           </div>
         ) : (
@@ -204,7 +238,7 @@ export function WishlistPage() {
           </div>
         )}
       </section>
-      <WishlistSubmissionForm />
+      <WishlistSubmitDisclosure />
     </main>
   );
 }

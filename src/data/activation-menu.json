@@ -15,6 +15,12 @@
         "Recurring sessions build habit and community over time."
       ],
       "image": "/assets/activation-menu/yoga-lawn-office-CnEjZC9l.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/hero-yoga-lawn.jpg",
+          "alt": "Group yoga class on a landscaped outdoor lawn"
+        }
+      ],
       "related": [
         "rooftop-yoga",
         "stretch-and-sip"
@@ -62,6 +68,12 @@
         "Variety keeps the calendar fresh and participation high."
       ],
       "image": "/assets/activation-menu/group-fitness-high-fives-C7ChLmtX.jpg",
+      "gallery": [
+        {
+          "src": "/assets/images/High Five after Workout_edited.png",
+          "alt": "A fitness instructor and participant celebrating after a workout"
+        }
+      ],
       "related": [
         "personal-training",
         "fitness-center-orientations",

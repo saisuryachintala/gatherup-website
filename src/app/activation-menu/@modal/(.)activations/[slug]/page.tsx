@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ActivationModal } from "@/components/activation-menu/ActivationModal";
-import { ACTIVATIONS, getActivationBySlug } from "@/data/activation-menu";
+import {
+  ACTIVATIONS,
+  ACTIVATION_CATEGORIES,
+  getActivationBySlug,
+  type ActivationMenuView,
+} from "@/data/activation-menu";
 
 export function generateStaticParams() {
   return ACTIVATIONS.map(({ slug }) => ({ slug }));
@@ -24,12 +29,23 @@ export async function generateMetadata({
 
 export default async function ActivationModalPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ view?: string }>;
 }) {
-  const { slug } = await params;
+  const [{ slug }, { view }] = await Promise.all([params, searchParams]);
   const activation = getActivationBySlug(slug);
   if (!activation) notFound();
 
-  return <ActivationModal activation={activation} />;
+  const isKnownView = ACTIVATION_CATEGORIES.some((category) => category === view) || view === "My Wishlist";
+  const activeView: ActivationMenuView = isKnownView ? (view as ActivationMenuView) : "All";
+
+  return (
+    <ActivationModal
+      key={activation.slug}
+      activation={activation}
+      view={activeView}
+    />
+  );
 }

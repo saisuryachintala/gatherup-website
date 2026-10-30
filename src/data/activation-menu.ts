@@ -1,6 +1,11 @@
 import catalogueData from "./activation-menu.json";
 
-export type Activation = (typeof catalogueData.activations)[number];
+export const ACTIVATION_CATEGORIES = ["All", "Health and Fitness", "Pop-Ups", "Autumn Inspired"] as const;
+export type ActivationMenuView = (typeof ACTIVATION_CATEGORIES)[number] | "My Wishlist";
+
+export type Activation = (typeof catalogueData.activations)[number] & {
+  gallery?: { src: string; alt: string }[];
+};
 
 export const ACTIVATIONS: Activation[] = catalogueData.activations;
 export const CATALOGUE_HERO = catalogueData.hero;

@@ -1,16 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ACTIVATIONS } from "@/data/activation-menu";
+import { ACTIVATIONS, ACTIVATION_CATEGORIES, type ActivationMenuView } from "@/data/activation-menu";
 import { ActivationCard } from "./ActivationCard";
-import { WishlistSubmissionForm } from "./WishlistPage";
+import { WishlistSubmitDisclosure } from "./WishlistPage";
 import { useWishlist } from "./WishlistProvider";
 
-const CATEGORIES = ["All", "Health and Fitness", "Pop-Ups", "Autumn Inspired"] as const;
-type CatalogueView = (typeof CATEGORIES)[number] | "My Wishlist";
-
 export function ActivationCatalogue() {
-  const [category, setCategory] = useState<CatalogueView>("All");
+  const [category, setCategory] = useState<ActivationMenuView>("All");
   const { savedSlugs } = useWishlist();
   const savedActivations = useMemo(
     () => ACTIVATIONS.filter((activation) => savedSlugs.includes(activation.slug)),
@@ -30,7 +27,7 @@ export function ActivationCatalogue() {
     <section className="am-catalogue" id="catalog" aria-label="Browse activations">
       <div className="am-catalogue__controls">
         <div className="am-filters" role="group" aria-label="Filter activations by category">
-          {CATEGORIES.map((item) => (
+          {ACTIVATION_CATEGORIES.map((item) => (
             <button
               className={`am-filter${category === item ? " is-active" : ""}`}
               key={item}
@@ -61,7 +58,7 @@ export function ActivationCatalogue() {
           {savedActivations.length > 0 ? (
             <div className="am-grid">
               {savedActivations.map((activation) => (
-                <ActivationCard activation={activation} key={activation.slug} />
+                <ActivationCard activation={activation} key={activation.slug} view={category} />
               ))}
             </div>
           ) : (
@@ -70,15 +67,12 @@ export function ActivationCatalogue() {
               <p>Save activations with the heart button and they will appear here.</p>
             </div>
           )}
-          <details className="am-wishlist-submit">
-            <summary>Continue to submit your wishlist</summary>
-            <WishlistSubmissionForm embedded />
-          </details>
+          <WishlistSubmitDisclosure />
         </section>
       ) : (
         <div className="am-grid">
           {activations.map((activation) => (
-            <ActivationCard activation={activation} key={activation.slug} />
+            <ActivationCard activation={activation} key={activation.slug} view={category} />
           ))}
         </div>
       )}

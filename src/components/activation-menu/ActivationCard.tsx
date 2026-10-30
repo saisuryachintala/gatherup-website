@@ -3,10 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
-import type { Activation } from "@/data/activation-menu";
+import type { Activation, ActivationMenuView } from "@/data/activation-menu";
 import { useWishlist } from "./WishlistProvider";
 
-export function ActivationCard({ activation }: { activation: Activation }) {
+export function ActivationCard({
+  activation,
+  view = "All",
+}: {
+  activation: Activation;
+  view?: ActivationMenuView;
+}) {
   const { isSaved, toggleSaved } = useWishlist();
   const saved = isSaved(activation.slug);
 
@@ -36,7 +42,7 @@ export function ActivationCard({ activation }: { activation: Activation }) {
         <p className="am-card__description">{activation.shortDescription}</p>
       </div>
       <Link
-        href={`/activation-menu/activations/${activation.slug}`}
+        href={`/activation-menu/activations/${activation.slug}?view=${encodeURIComponent(view)}`}
         className="am-card__overlay-link"
         aria-label={`View ${activation.name}`}
       >

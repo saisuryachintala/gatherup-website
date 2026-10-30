@@ -2,8 +2,8 @@
 
 import { getImageProps } from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
-import { ChevronLeft, ChevronRight, Heart, X } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent, type TouchEvent } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight, Heart, X } from "lucide-react";
 import {
   ACTIVATIONS,
   getRelatedActivations,
@@ -25,6 +25,7 @@ export function ActivationModal({
   const isClosingRef = useRef(false);
   const closeTimerRef = useRef<number | null>(null);
   const sheetDragStartY = useRef<number | null>(null);
+  const pageTouchStart = useRef<{ x: number; y: number } | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [activeSlug, setActiveSlug] = useState(activation.slug);
@@ -47,8 +48,13 @@ export function ActivationModal({
       : items;
   }, [activeActivation, savedSlugs, view]);
   const currentIndex = navigableActivations.findIndex((item) => item.slug === activeActivation.slug);
-  const previous = currentIndex > 0 ? navigableActivations[currentIndex - 1] : undefined;
-  const next = navigableActivations[currentIndex + 1];
+  const hasMultipleActivations = navigableActivations.length > 1;
+  const previous = hasMultipleActivations
+    ? navigableActivations[(currentIndex - 1 + navigableActivations.length) % navigableActivations.length]
+    : undefined;
+  const next = hasMultipleActivations
+    ? navigableActivations[(currentIndex + 1) % navigableActivations.length]
+    : undefined;
   const adjacentImageSources = useMemo(
     () => [previous, next].flatMap((item) => item ? [item.image, ...(item.gallery ?? []).map((image) => image.src)] : []),
     [next, previous],
@@ -90,6 +96,27 @@ export function ActivationModal({
       closeModal();
     }
   };
+  const handleDetailTouchStart = (event: TouchEvent<HTMLElement>) => {
+    if (event.touches.length !== 1) return;
+    const target = event.target;
+    if (target instanceof Element && target.closest("button, a, input, select, textarea")) return;
+    pageTouchStart.current = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+    };
+  };
+  const handleDetailTouchEnd = (event: TouchEvent<HTMLElement>) => {
+    const start = pageTouchStart.current;
+    pageTouchStart.current = null;
+    if (!start || event.changedTouches.length !== 1) return;
+
+    const deltaX = event.changedTouches[0].clientX - start.x;
+    const deltaY = event.changedTouches[0].clientY - start.y;
+    if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+
+    if (deltaX < 0 && next) navigateToActivation(next, "next");
+    if (deltaX > 0 && previous) navigateToActivation(previous, "previous");
+  };
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -99,10 +126,22 @@ export function ActivationModal({
       if (event.key === "Escape" && dialog.open) {
         event.preventDefault();
         closeModal();
+        return;
       }
+
+      if (!dialog.open || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+      if (event.target instanceof Element && event.target.closest("input, select, textarea, [contenteditable='true']")) return;
+
+      const target = event.target;
+      if (!(target instanceof Node) || !dialog.contains(target)) return;
+
+      event.preventDefault();
+      if (event.key === "ArrowLeft" && previous) navigateToActivation(previous, "previous");
+      if (event.key === "ArrowRight" && next) navigateToActivation(next, "next");
     };
 
     dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>(".am-activation-modal__close")?.focus({ preventScroll: true });
     const entryFrame = window.requestAnimationFrame(() => setIsVisible(true));
     window.addEventListener("keydown", closeOnEscape, true);
     return () => {
@@ -114,7 +153,7 @@ export function ActivationModal({
       }
       if (dialog.open) dialog.close();
     };
-  }, [closeModal]);
+  }, [closeModal, navigateToActivation, next, previous]);
 
   useEffect(() => {
     dialogRef.current?.scrollTo({ top: 0 });
@@ -158,36 +197,55 @@ export function ActivationModal({
             sheetDragStartY.current = null;
           }}
         />
-        <p>Activation details</p>
-        <nav className="am-activation-modal__navigation" aria-label="Browse activations">
-          <span>{currentIndex + 1} of {navigableActivations.length}</span>
-          <button
-            className="am-activation-modal__step"
-            type="button"
-            aria-label="Previous activation"
-            disabled={!previous}
-            onClick={() => previous && navigateToActivation(previous, "previous")}
+        <label className="am-activation-modal__picker">
+          <span className="sr-only">Choose an activation</span>
+          <select
+            aria-label="Choose an activation"
+            value={activeActivation.slug}
+            onChange={(event) => {
+              const selected = navigableActivations.find((item) => item.slug === event.target.value);
+              if (!selected) return;
+              const selectedIndex = navigableActivations.findIndex((item) => item.slug === selected.slug);
+              navigateToActivation(selected, selectedIndex < currentIndex ? "previous" : "next");
+            }}
           >
-            <ChevronLeft aria-hidden="true" size={21} />
-          </button>
+            {navigableActivations.map((item) => (
+              <option value={item.slug} key={item.slug}>{item.name}</option>
+            ))}
+          </select>
+          <ChevronDown aria-hidden="true" size={17} />
+        </label>
+        <div className="am-activation-modal__header-actions">
+          <nav className="am-activation-modal__navigation" aria-label="Browse activations">
+            <span>{currentIndex + 1} of {navigableActivations.length}</span>
+            <button
+              className="am-activation-modal__step"
+              type="button"
+              aria-label="Previous activation"
+              disabled={!previous}
+              onClick={() => previous && navigateToActivation(previous, "previous")}
+            >
+              <ChevronLeft aria-hidden="true" size={21} />
+            </button>
+            <button
+              className="am-activation-modal__step"
+              type="button"
+              aria-label="Next activation"
+              disabled={!next}
+              onClick={() => next && navigateToActivation(next, "next")}
+            >
+              <ChevronRight aria-hidden="true" size={21} />
+            </button>
+          </nav>
           <button
-            className="am-activation-modal__step"
+            className="am-activation-modal__close"
             type="button"
-            aria-label="Next activation"
-            disabled={!next}
-            onClick={() => next && navigateToActivation(next, "next")}
+            aria-label="Close activation details"
+            onClick={closeModal}
           >
-            <ChevronRight aria-hidden="true" size={21} />
+            <X aria-hidden="true" size={22} />
           </button>
-        </nav>
-        <button
-          className="am-activation-modal__close"
-          type="button"
-          aria-label="Close activation details"
-          onClick={closeModal}
-        >
-          <X aria-hidden="true" size={22} />
-        </button>
+        </div>
       </div>
       <div
         className="am-activation-modal__view"
@@ -195,7 +253,14 @@ export function ActivationModal({
         data-transition-direction={transitionDirection ?? undefined}
       >
         <ActivationImageCarousel activation={activeActivation} />
-        <article className="am-detail__content">
+        <article
+          className="am-detail__content"
+          onTouchStart={handleDetailTouchStart}
+          onTouchEnd={handleDetailTouchEnd}
+          onTouchCancel={() => {
+            pageTouchStart.current = null;
+          }}
+        >
           <p className="am-eyebrow">{activeActivation.category}</p>
           <h1 id="am-activation-modal-title">{activeActivation.name}</h1>
           <p className="am-detail__tagline">{activeActivation.tagline}</p>
@@ -236,27 +301,6 @@ export function ActivationModal({
           </section>
         )}
       </div>
-        <nav className="am-activation-modal__mobile-navigation" aria-label="Browse activations">
-          <button
-            className="am-activation-modal__step"
-            type="button"
-            aria-label="Previous activation"
-            disabled={!previous}
-            onClick={() => previous && navigateToActivation(previous, "previous")}
-          >
-            <ChevronLeft aria-hidden="true" size={21} />
-          </button>
-          <span>{currentIndex + 1} of {navigableActivations.length}</span>
-          <button
-            className="am-activation-modal__step"
-            type="button"
-            aria-label="Next activation"
-            disabled={!next}
-            onClick={() => next && navigateToActivation(next, "next")}
-          >
-            <ChevronRight aria-hidden="true" size={21} />
-          </button>
-        </nav>
     </dialog>
   );
 }

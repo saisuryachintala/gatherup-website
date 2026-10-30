@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { ACTIVATIONS } from "@/data/activation-menu";
 import { ActivationCard } from "./ActivationCard";
 import { useWishlist } from "./WishlistProvider";
@@ -45,7 +44,8 @@ export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolea
       !values.email ||
       !values.company ||
       !values.propertyName ||
-      !values.propertyLocation
+      !values.propertyLocation ||
+      !values.goal
     ) {
       setErrorMessage("Please complete all required fields before submitting.");
       return;
@@ -145,8 +145,8 @@ export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolea
               <input name="propertyLocation" autoComplete="address-level2" maxLength={200} required disabled={isSubmitting} />
             </label>
             <label className="am-wishlist-form__full">
-              <span>What are you most interested in improving? (optional)</span>
-              <select name="goal" defaultValue="" disabled={isSubmitting}>
+              <span>What are you most interested in improving?</span>
+              <select name="goal" defaultValue="" required disabled={isSubmitting}>
                 <option value="">Select one</option>
                 <option value="tenant-engagement">Tenant engagement</option>
                 <option value="amenity-usage">Amenity usage</option>
@@ -172,39 +172,6 @@ export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolea
               </form>
         )}
     </section>
-  );
-}
-
-export function WishlistSubmitDisclosure() {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 600px)");
-    const updateViewport = () => {
-      setIsSmallScreen(mediaQuery.matches);
-      setIsOpen(!mediaQuery.matches);
-    };
-
-    updateViewport();
-    mediaQuery.addEventListener("change", updateViewport);
-    return () => mediaQuery.removeEventListener("change", updateViewport);
-  }, []);
-
-  return (
-    <details
-      className="am-wishlist-submit"
-      open={!isSmallScreen || isOpen}
-      onToggle={(event) => {
-        if (isSmallScreen) setIsOpen(event.currentTarget.open);
-      }}
-    >
-      <summary>
-        Submit wishlist
-        <ArrowRight aria-hidden="true" size={20} />
-      </summary>
-      <WishlistSubmissionForm embedded />
-    </details>
   );
 }
 
@@ -238,7 +205,7 @@ export function WishlistPage() {
           </div>
         )}
       </section>
-      <WishlistSubmitDisclosure />
+      <WishlistSubmissionForm />
     </main>
   );
 }

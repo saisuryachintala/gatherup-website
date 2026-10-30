@@ -24,7 +24,6 @@ const WISHLIST_HEADERS = [
   "Source",
 ];
 const GOALS = new Set([
-  "",
   "tenant-engagement",
   "amenity-usage",
   "tenant-retention",
@@ -82,9 +81,9 @@ function parseSubmission(body: unknown): WishlistSubmission | string {
     return "A valid email address is required.";
   }
 
-  const goal = values.goal === undefined ? "" : values.goal;
+  const goal = values.goal;
   if (typeof goal !== "string" || !GOALS.has(goal)) {
-    return "Please select a valid improvement goal.";
+    return "Please select an improvement goal.";
   }
 
   const activationSlugs = values.activationSlugs === undefined ? [] : values.activationSlugs;

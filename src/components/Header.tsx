@@ -82,6 +82,12 @@ export const Header: React.FC = () => {
         const currentScrollY = window.scrollY;
         const scrollThreshold = 10;
 
+        if (pathname.startsWith('/activation-menu')) {
+            setIsHeaderVisible(true);
+            lastScrollYRef.current = currentScrollY;
+            return;
+        }
+
         if (currentScrollY < scrollThreshold) {
             setIsHeaderVisible(true);
         } else if (currentScrollY > lastScrollYRef.current && currentScrollY > scrollThreshold) {
@@ -91,7 +97,7 @@ export const Header: React.FC = () => {
         }
 
         lastScrollYRef.current = currentScrollY;
-    }, []);
+    }, [pathname]);
 
     useEffect(() => {
         if (mobileMenuOpen) return;

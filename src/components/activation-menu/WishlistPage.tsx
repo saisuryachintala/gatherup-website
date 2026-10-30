@@ -16,13 +16,11 @@ interface WishlistFormValues {
   goal: string;
 }
 
-export function WishlistPage() {
+export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolean }) {
   const { savedSlugs } = useWishlist();
   const [submittedName, setSubmittedName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const savedActivations = ACTIVATIONS.filter((activation) => savedSlugs.includes(activation.slug));
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSubmitting) {
@@ -94,34 +92,7 @@ export function WishlistPage() {
   }
 
   return (
-    <main className="am-wishlist-page">
-      <div className="am-wishlist-page__intro">
-        <h1>Your GatherUp Tenant Experience Wishlist:</h1>
-        <p>
-          Everything you&apos;ve saved lives here. Next step is to submit the list and we&apos;ll help you create a
-          unique programming plan for your property.
-        </p>
-      </div>
-
-      <section className="am-wishlist-items" aria-label="Saved activations">
-        {savedActivations.length > 0 ? (
-          <div className="am-grid">
-            {savedActivations.map((activation) => (
-              <ActivationCard activation={activation} key={activation.slug} />
-            ))}
-          </div>
-        ) : (
-          <div className="am-empty-wishlist">
-            <h2>Your wishlist is empty</h2>
-            <p>Browse the menu and heart anything that feels right for your building. There&apos;s no commitment in saving an idea.</p>
-            <Link className="am-primary-button" href="/activation-menu">
-              Explore Activations
-            </Link>
-          </div>
-        )}
-      </section>
-
-      <section className="am-wishlist-form-section">
+    <section className={`am-wishlist-form-section${embedded ? " am-wishlist-form-section--embedded" : ""}`}>
         <div className="am-wishlist-form-section__intro">
           <h2>Like what you see? Let&apos;s bring these ideas to life!</h2>
           <p>
@@ -199,7 +170,41 @@ export function WishlistPage() {
                 </p>
               </form>
         )}
+    </section>
+  );
+}
+
+export function WishlistPage() {
+  const { savedSlugs } = useWishlist();
+  const savedActivations = ACTIVATIONS.filter((activation) => savedSlugs.includes(activation.slug));
+
+  return (
+    <main className="am-wishlist-page">
+      <div className="am-wishlist-page__intro">
+        <h1>Your GatherUp Tenant Experience Wishlist:</h1>
+        <p>
+          Everything you&apos;ve saved lives here. Next step is to submit the list and we&apos;ll help you create a
+          unique programming plan for your property.
+        </p>
+      </div>
+      <section className="am-wishlist-items" aria-label="Saved activations">
+        {savedActivations.length > 0 ? (
+          <div className="am-grid">
+            {savedActivations.map((activation) => (
+              <ActivationCard activation={activation} key={activation.slug} />
+            ))}
+          </div>
+        ) : (
+          <div className="am-empty-wishlist">
+            <h2>Your wishlist is empty</h2>
+            <p>Browse the menu and heart anything that feels right for your building. There&apos;s no commitment in saving an idea.</p>
+            <Link className="am-primary-button" href="/activation-menu">
+              Explore Activations
+            </Link>
+          </div>
+        )}
       </section>
+      <WishlistSubmissionForm />
     </main>
   );
 }

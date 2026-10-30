@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 
 export default function ActivationMenuLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
-  return <ActivationMenuShell>{children}</ActivationMenuShell>;
+  return <ActivationMenuShell modal={modal}>{children}</ActivationMenuShell>;
 }

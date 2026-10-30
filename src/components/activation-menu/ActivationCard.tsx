@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, MoveRight } from "lucide-react";
+import { Heart } from "lucide-react";
 import type { Activation } from "@/data/activation-menu";
 import { useWishlist } from "./WishlistProvider";
 
@@ -17,7 +17,7 @@ export function ActivationCard({ activation }: { activation: Activation }) {
           src={activation.image}
           alt={activation.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 359px) 100vw, (max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
         />
         <button
           className={`am-save-button${saved ? " is-saved" : ""}`}
@@ -34,10 +34,6 @@ export function ActivationCard({ activation }: { activation: Activation }) {
         <p className="am-eyebrow">{activation.category}</p>
         <h2>{activation.name}</h2>
         <p className="am-card__description">{activation.shortDescription}</p>
-        <span className="am-card__link">
-          View {activation.name}
-          <MoveRight aria-hidden="true" size={17} />
-        </span>
       </div>
       <Link
         href={`/activation-menu/activations/${activation.slug}`}

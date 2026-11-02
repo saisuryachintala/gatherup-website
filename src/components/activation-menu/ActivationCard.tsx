@@ -9,9 +9,11 @@ import { useWishlist } from "./WishlistProvider";
 export function ActivationCard({
   activation,
   view = "All",
+  onOpen,
 }: {
   activation: Activation;
   view?: ActivationMenuView;
+  onOpen?: () => void;
 }) {
   const { isSaved, toggleSaved } = useWishlist();
   const saved = isSaved(activation.slug);
@@ -41,13 +43,24 @@ export function ActivationCard({
         <h2>{activation.name}</h2>
         <p className="am-card__description">{activation.shortDescription}</p>
       </div>
-      <Link
-        href={`/activation-menu/activations/${activation.slug}?view=${encodeURIComponent(view)}`}
-        className="am-card__overlay-link"
-        aria-label={`View ${activation.name}`}
-      >
-        <span className="sr-only">View {activation.name}</span>
-      </Link>
+      {onOpen ? (
+        <button
+          className="am-card__overlay-link"
+          type="button"
+          aria-label={`View ${activation.name}`}
+          onClick={onOpen}
+        >
+          <span className="sr-only">View {activation.name}</span>
+        </button>
+      ) : (
+        <Link
+          href={`/activation-menu/activations/${activation.slug}?view=${encodeURIComponent(view)}`}
+          className="am-card__overlay-link"
+          aria-label={`View ${activation.name}`}
+        >
+          <span className="sr-only">View {activation.name}</span>
+        </Link>
+      )}
     </article>
   );
 }

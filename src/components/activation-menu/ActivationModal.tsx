@@ -12,6 +12,7 @@ import {
 } from "@/data/activation-menu";
 import { ActivationCard } from "./ActivationCard";
 import { ActivationImageCarousel } from "./ActivationImageCarousel";
+import { WishlistShortcut } from "./WishlistShortcut";
 import { useWishlist } from "./WishlistProvider";
 
 export function ActivationModal({
@@ -22,12 +23,17 @@ export function ActivationModal({
   view: ActivationMenuView;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const pickerRef = useRef<HTMLDivElement>(null);
+  const pickerButtonRef = useRef<HTMLButtonElement>(null);
   const isClosingRef = useRef(false);
   const closeTimerRef = useRef<number | null>(null);
   const sheetDragStartY = useRef<number | null>(null);
   const pageTouchStart = useRef<{ x: number; y: number } | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const pickerOpenRef = useRef(false);
   const [activeSlug, setActiveSlug] = useState(activation.slug);
   const [transitionDirection, setTransitionDirection] = useState<"previous" | "next" | null>(null);
   const router = useRouter();
@@ -49,6 +55,10 @@ export function ActivationModal({
   }, [activeActivation, savedSlugs, view]);
   const currentIndex = navigableActivations.findIndex((item) => item.slug === activeActivation.slug);
   const hasMultipleActivations = navigableActivations.length > 1;
+  const setPickerOpen = (open: boolean) => {
+    pickerOpenRef.current = open;
+    setIsPickerOpen(open);
+  };
   const previous = hasMultipleActivations
     ? navigableActivations[(currentIndex - 1 + navigableActivations.length) % navigableActivations.length]
     : undefined;
@@ -123,6 +133,14 @@ export function ActivationModal({
     if (!dialog || dialog.open) return;
 
     const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && pickerOpenRef.current) {
+        event.preventDefault();
+        event.stopPropagation();
+        setPickerOpen(false);
+        pickerButtonRef.current?.focus({ preventScroll: true });
+        return;
+      }
+
       if (event.key === "Escape" && dialog.open) {
         event.preventDefault();
         closeModal();
@@ -142,10 +160,10 @@ export function ActivationModal({
 
     dialog.showModal();
     dialog.querySelector<HTMLButtonElement>(".am-activation-modal__close")?.focus({ preventScroll: true });
-    const entryFrame = window.requestAnimationFrame(() => setIsVisible(true));
+    const entryTimer = window.setTimeout(() => setIsVisible(true), 16);
     window.addEventListener("keydown", closeOnEscape, true);
     return () => {
-      window.cancelAnimationFrame(entryFrame);
+      window.clearTimeout(entryTimer);
       window.removeEventListener("keydown", closeOnEscape, true);
       if (closeTimerRef.current !== null) {
         window.clearTimeout(closeTimerRef.current);
@@ -156,7 +174,20 @@ export function ActivationModal({
   }, [closeModal, navigateToActivation, next, previous]);
 
   useEffect(() => {
-    dialogRef.current?.scrollTo({ top: 0 });
+    if (!isPickerOpen) return;
+
+    const closePickerOnOutsideClick = (event: Event) => {
+      if (event.target instanceof Node && !pickerRef.current?.contains(event.target)) {
+        setPickerOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", closePickerOnOutsideClick);
+    return () => document.removeEventListener("pointerdown", closePickerOnOutsideClick);
+  }, [isPickerOpen]);
+
+  useEffect(() => {
+    scrollAreaRef.current?.scrollTo({ top: 0 });
   }, [activeActivation.slug]);
 
   useEffect(() => {
@@ -197,24 +228,46 @@ export function ActivationModal({
             sheetDragStartY.current = null;
           }}
         />
-        <label className="am-activation-modal__picker">
-          <span className="sr-only">Choose an activation</span>
-          <select
-            aria-label="Choose an activation"
-            value={activeActivation.slug}
-            onChange={(event) => {
-              const selected = navigableActivations.find((item) => item.slug === event.target.value);
-              if (!selected) return;
-              const selectedIndex = navigableActivations.findIndex((item) => item.slug === selected.slug);
-              navigateToActivation(selected, selectedIndex < currentIndex ? "previous" : "next");
-            }}
+        <div className="am-activation-modal__picker" ref={pickerRef}>
+          <button
+            className="am-activation-modal__picker-trigger"
+            type="button"
+            ref={pickerButtonRef}
+            aria-label={`Choose an activation. Current: ${activeActivation.name}`}
+            aria-haspopup="listbox"
+            aria-expanded={isPickerOpen}
+            aria-controls="am-activation-picker-options"
+            onClick={() => setPickerOpen(!isPickerOpen)}
           >
-            {navigableActivations.map((item) => (
-              <option value={item.slug} key={item.slug}>{item.name}</option>
-            ))}
-          </select>
-          <ChevronDown aria-hidden="true" size={17} />
-        </label>
+            <span>{activeActivation.name}</span>
+            <ChevronDown aria-hidden="true" size={17} />
+          </button>
+          {isPickerOpen && (
+            <div
+              className="am-activation-modal__picker-options"
+              id="am-activation-picker-options"
+              role="listbox"
+              aria-label="Choose an activation"
+            >
+              {navigableActivations.map((item) => (
+                <button
+                  className="am-activation-modal__picker-option"
+                  type="button"
+                  role="option"
+                  aria-selected={item.slug === activeActivation.slug}
+                  key={item.slug}
+                  onClick={() => {
+                    const selectedIndex = navigableActivations.findIndex((option) => option.slug === item.slug);
+                    navigateToActivation(item, selectedIndex < currentIndex ? "previous" : "next");
+                    setPickerOpen(false);
+                  }}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="am-activation-modal__header-actions">
           <nav className="am-activation-modal__navigation" aria-label="Browse activations">
             <span>{currentIndex + 1} of {navigableActivations.length}</span>
@@ -247,60 +300,71 @@ export function ActivationModal({
           </button>
         </div>
       </div>
-      <div
-        className="am-activation-modal__view"
-        key={activeActivation.slug}
-        data-transition-direction={transitionDirection ?? undefined}
-      >
-        <ActivationImageCarousel activation={activeActivation} />
-        <article
-          className="am-detail__content"
-          onTouchStart={handleDetailTouchStart}
-          onTouchEnd={handleDetailTouchEnd}
-          onTouchCancel={() => {
-            pageTouchStart.current = null;
-          }}
+      <div className="am-activation-modal__scroll-area" ref={scrollAreaRef}>
+        <div
+          className="am-activation-modal__view"
+          key={activeActivation.slug}
+          data-transition-direction={transitionDirection ?? undefined}
         >
-          <p className="am-eyebrow">{activeActivation.category}</p>
-          <h1 id="am-activation-modal-title">{activeActivation.name}</h1>
-          <p className="am-detail__tagline">{activeActivation.tagline}</p>
-          <button
-            className={`am-primary-button am-detail__save${saved ? " is-saved" : ""}`}
-            type="button"
-            aria-pressed={saved}
-            onClick={() => toggleSaved(activeActivation.slug)}
+          <ActivationImageCarousel activation={activeActivation} />
+          <article
+            className="am-detail__content"
+            onTouchStart={handleDetailTouchStart}
+            onTouchEnd={handleDetailTouchEnd}
+            onTouchCancel={() => {
+              pageTouchStart.current = null;
+            }}
           >
-            <Heart aria-hidden="true" size={19} fill={saved ? "currentColor" : "none"} />
-            {saved ? "Added to Wishlist" : "Add to Wishlist"}
-          </button>
-          <section className="am-detail__section">
-            <h2>The Experience</h2>
-            <p>{activeActivation.experience}</p>
-          </section>
-          <section className="am-detail__section">
-            <h2>Why It Works</h2>
-            <ul>
-              {activeActivation.whyItWorks.map((reason) => <li key={reason}>{reason}</li>)}
-            </ul>
-          </section>
-          <section className="am-inspiration">
-            <h2>Additional Inspiration</h2>
-            <ul>
-              {activeActivation.additionalInspiration.map((idea) => <li key={idea}>{idea}</li>)}
-            </ul>
-          </section>
-        </article>
-        {related.length > 0 && (
-          <section className="am-related am-related--modal" aria-labelledby="am-related-heading">
-            <h2 id="am-related-heading">You Might Also Like</h2>
-            <div className="am-grid">
-              {related.map((item) => (
-                <ActivationCard activation={item} key={item.slug} view="All" />
-              ))}
+            <p className="am-eyebrow">{activeActivation.category}</p>
+            <div className="am-detail__title-row">
+              <h1 id="am-activation-modal-title">{activeActivation.name}</h1>
+              <button
+                className={`am-primary-button am-detail__save${saved ? " is-saved" : ""}`}
+                type="button"
+                aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
+                aria-pressed={saved}
+                onClick={() => toggleSaved(activeActivation.slug)}
+              >
+                <Heart aria-hidden="true" size={19} fill={saved ? "currentColor" : "none"} />
+                <span>{saved ? "Added to Wishlist" : "Add to Wishlist"}</span>
+              </button>
             </div>
-          </section>
-        )}
+            <p className="am-detail__tagline">{activeActivation.tagline}</p>
+            <section className="am-detail__section">
+              <h2>The Experience</h2>
+              <p>{activeActivation.experience}</p>
+            </section>
+            <section className="am-detail__section">
+              <h2>Why It Works</h2>
+              <ul>
+                {activeActivation.whyItWorks.map((reason) => <li key={reason}>{reason}</li>)}
+              </ul>
+            </section>
+            <section className="am-inspiration">
+              <h2>Additional Inspiration</h2>
+              <ul>
+                {activeActivation.additionalInspiration.map((idea) => <li key={idea}>{idea}</li>)}
+              </ul>
+            </section>
+          </article>
+          {related.length > 0 && (
+            <section className="am-related am-related--modal" aria-labelledby="am-related-heading">
+              <h2 id="am-related-heading">You Might Also Like</h2>
+              <div className="am-grid">
+                {related.map((item) => (
+                  <ActivationCard
+                    activation={item}
+                    key={item.slug}
+                    view="All"
+                    onOpen={() => navigateToActivation(item, "next")}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
+      <WishlistShortcut className="am-wishlist-shortcut--modal" />
     </dialog>
   );
 }

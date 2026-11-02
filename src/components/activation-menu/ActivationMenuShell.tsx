@@ -2,6 +2,7 @@
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { WishlistShortcut } from "./WishlistShortcut";
 
 export function ActivationMenuShell({
   children,
@@ -14,6 +15,7 @@ export function ActivationMenuShell({
     <div className="activation-menu-site">
       <Header />
       {children}
+      <WishlistShortcut />
       {modal}
       <Footer />
     </div>

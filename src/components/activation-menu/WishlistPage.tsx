@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { ACTIVATIONS } from "@/data/activation-menu";
 import { ActivationCard } from "./ActivationCard";
@@ -18,9 +18,21 @@ interface WishlistFormValues {
 
 export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolean }) {
   const { savedSlugs } = useWishlist();
+  const successRef = useRef<HTMLDivElement>(null);
   const [submittedName, setSubmittedName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (!submittedName || !successRef.current) return;
+
+    successRef.current.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "center",
+    });
+    successRef.current.focus({ preventScroll: true });
+  }, [submittedName]);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSubmitting) {
@@ -103,7 +115,7 @@ export function WishlistSubmissionForm({ embedded = false }: { embedded?: boolea
         </div>
 
         {submittedName ? (
-          <div className="am-submission-success" role="status">
+          <div className="am-submission-success" ref={successRef} role="status" tabIndex={-1}>
             <h3>Thank you, {submittedName}.</h3>
             <p>
               Your wishlist has been sent to GatherUp. Your saved activations will remain in your browser.

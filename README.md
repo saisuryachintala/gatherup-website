@@ -1,6 +1,6 @@
-# GatherUp Wellness Website
+# GatherUp Experiences Website
 
-Marketing website for GatherUp Wellness — wellness programming for commercial and residential properties.
+Marketing website for GatherUp Experiences — wellness programming for commercial and residential properties.
 
 ## Tech Stack
 

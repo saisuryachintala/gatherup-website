@@ -132,7 +132,7 @@ export const Header: React.FC = () => {
                         <Link href="/" className="relative w-20 h-20 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0">
                             <Image
                                 src="/assets/GatherUp-Lockups/PNG/Lockups_Symbol_Fresh_Green_Transparent_Background_v2.png"
-                                alt="GatherUp Wellness"
+                                alt="GatherUp Experiences"
                                 fill
                                 sizes="80px"
                                 className="object-contain"

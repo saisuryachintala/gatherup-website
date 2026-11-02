@@ -213,7 +213,7 @@ buttonVariants.forEach(variant => {
 
 // ImpactCalculator.test.tsx - fixture for table data
 const amenityFixture = {
-  amenityType: 'GatherUp Wellness',
+  amenityType: 'GatherUp Experiences',
   monthlyUsage: '60-80%',
   isElite: true
 };

@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { BookDemoButton } from './BookDemoButton';
+import { ViewActivationMenuButton } from './ViewActivationMenuButton';
 import { scrollReveal, imageLoad, staggerContainer } from '@/utils/animations';
 
 export const PowerOfTenant: React.FC = () => {
@@ -26,7 +27,7 @@ export const PowerOfTenant: React.FC = () => {
                     Unleash the
                 </h3>
                 <h1 className="text-4xl md:text-6xl font-bold text-[#053d3d] mb-2 font-display">
-                    Power of Tenant Well-Being
+                    Power of Tenant Experiences
                 </h1>
                 <h3 className="text-[#053d3d] font-bold text-xl font-display">
                     for Property Growth
@@ -97,7 +98,7 @@ export const PowerOfTenant: React.FC = () => {
                         >
                             {/* Heading */}
                             <p className="text-2xl md:text-2xl lg:text-3xl font-bold text-white font-display leading-[1.05]">
-                                Tenant Wellness that Works.
+                                Tenant Engagement that Works.
                             </p>
 
                             {/* Subtitle */}
@@ -105,9 +106,10 @@ export const PowerOfTenant: React.FC = () => {
                                 Belonging. Well-Being. Business Impact.
                             </p>
 
-                            {/* Book a Demo Button - below texts, aligned with texts */}
+                            {/* View Activation Menu Button - below texts, aligned with texts */}
                             <div className="flex justify-center md:justify-star mt-2">
-                                <BookDemoButton />
+                                {/* <BookDemoButton /> */}
+                                <ViewActivationMenuButton />
                             </div>
                         </motion.div>
                     </div>

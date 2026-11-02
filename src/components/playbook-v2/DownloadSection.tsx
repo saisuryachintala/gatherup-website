@@ -361,7 +361,7 @@ export const DownloadSection: React.FC = () => {
                             {/* Privacy Notice */}
                             <p className="font-sans text-xs text-[#bce8e7]/60 leading-relaxed">
                                 <span className="font-bold text-[#bce8e7]/80">Privacy Notice:</span>{' '}
-                                GatherUp Wellness is committed to protecting your personal information in accordance with applicable
+                                GatherUp Experiences is committed to protecting your personal information in accordance with applicable
                                 U.S. federal and state privacy laws. By submitting this form, you consent to receiving marketing communications. You may
                                 unsubscribe or request removal of your data at any time by contacting us at{' '}
                                 <a href="mailto:info@gatherupwellness.com" className="text-[#a6ff48] underline">

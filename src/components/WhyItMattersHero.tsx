@@ -66,7 +66,7 @@ export const WhyItMattersHero: React.FC = () => {
                                 Why Does Tenant
                             </p>
                             <p className="font-bold text-[#A6FF48] leading-relaxed">
-                                Well-Being Matter?
+                                Engagement Matter?
                             </p>
                         </div>
                     </motion.div>

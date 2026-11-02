@@ -47,7 +47,7 @@ export const WhoWeServe: React.FC = () => {
                         variants={scrollReveal}
                         className="text-center text-lg mb-4 text-[#F5FAF5]"
                     >
-                        GatherUp partners with <span className="font-bold">property leaders</span> committed to building healthier, more connected communities.
+                        GatherUp partners with <span className="font-bold">property leaders</span> committed to building engaged, more connected communities.
                     </motion.p>
                     {/* Line separator - matches text width, responsive */}
                     <motion.div

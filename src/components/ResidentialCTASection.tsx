@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { BookDemoButton } from './BookDemoButton';
+import { ViewActivationMenuButton } from './ViewActivationMenuButton';
 import { scrollReveal, staggerContainer } from '@/utils/animations';
 
 interface ResidentialCTASectionProps {
@@ -41,7 +42,8 @@ export const ResidentialCTASection: React.FC<ResidentialCTASectionProps> = ({
                         {subtitle}
                     </motion.p>
                     <motion.div variants={scrollReveal}>
-                        <BookDemoButton />
+                        {/* <BookDemoButton /> */}
+                        <ViewActivationMenuButton />
                     </motion.div>
                 </motion.div>
             </div>

@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { BookDemoButton } from './BookDemoButton';
+import { ViewActivationMenuButton } from './ViewActivationMenuButton';
 import { fadeInUp, imageLoad, staggerContainer } from '@/utils/animations';
 
 export const Hero: React.FC = () => {
@@ -57,24 +58,25 @@ export const Hero: React.FC = () => {
                         className="w-full text-3xl sm:text-4xl sm:mt-4 mt-12 md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-lg"
                         style={{ fontFamily: 'Montserrat', fontSize: '50px', fontWeight: '700', lineHeight: '1.1em', letterSpacing: '0em' }}
                     >
-                        Wellness that transforms properties.
+                        Experiences that transforms properties.
                     </motion.h1>
 
                     <motion.div variants={fadeInUp}>
                         <div className="inline-block px-1 shadow-xl bg-white">
                             <p className="text-base md:text-lg lg:text-xl font-bold text-[#053d3d] leading-snug">
-                                Turning wellness into a driver of
+                                Turning engagement into a driver of
                             </p>
                         </div>
                         <div className="inline-block px-1 shadow-xl bg-white mt-1 md:mt-1">
                             <p className="text-base md:text-lg lg:text-xl font-bold text-[#053d3d] leading-snug">
-                                engagement, culture, and outcomes
+                                satisfaction, culture, and outcomes
                             </p>
                         </div>
                     </motion.div>
 
                     <motion.div variants={fadeInUp}>
-                        <BookDemoButton />
+                        {/* <BookDemoButton /> */}
+                        <ViewActivationMenuButton />
                     </motion.div>
                 </motion.div>
             </div>

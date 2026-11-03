@@ -596,7 +596,11 @@ export const Header: React.FC = () => {
                             >
                                 About Us
                             </Link>
-                            <BookDemoButton
+                            {/* <BookDemoButton
+                                className="justify-center mt-2"
+                                onClick={() => setMobileMenuOpen(false)}
+                            /> */}
+                            <ViewActivationMenuButton
                                 className="justify-center mt-2"
                                 onClick={() => setMobileMenuOpen(false)}
                             />

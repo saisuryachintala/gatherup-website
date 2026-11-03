@@ -22,8 +22,8 @@ export function ActivationDetail({
       <article>
         <div className="am-detail__image">
           <Image
-            src={activation.image}
-            alt={activation.name}
+            src={activation.gallery[0].src}
+            alt={activation.gallery[0].alt}
             fill
             priority
             sizes="100vw"

@@ -3,8 +3,9 @@ import catalogueData from "./activation-menu.json";
 export const ACTIVATION_CATEGORIES = ["All", "Health and Fitness", "Pop-Ups", "Autumn Inspired"] as const;
 export type ActivationMenuView = (typeof ACTIVATION_CATEGORIES)[number] | "My Wishlist";
 
-export type Activation = (typeof catalogueData.activations)[number] & {
-  gallery?: { src: string; alt: string }[];
+type ActivationData = (typeof catalogueData.activations)[number];
+export type Activation = Omit<ActivationData, "gallery"> & {
+  gallery: { src: string; alt: string }[];
 };
 
 export const ACTIVATIONS: Activation[] = catalogueData.activations;

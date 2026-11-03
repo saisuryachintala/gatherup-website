@@ -1,15 +1,17 @@
-# Activation Menu Wishlist: Google and Deployment Setup
+# Activation Menu Wishlist: Setup Guide
 
-This guide configures the wishlist API to find a manually created Google Sheet named **Activation Menu Wishlist** inside a dedicated Drive folder. The API initializes the configured tab and headers if needed, then appends each submission as a new row. It does not attempt to create the spreadsheet.
+This guide connects the Activation Menu wishlist form to Google Drive. The app already sends each submission to a private server endpoint. The endpoint checks the data and adds it to a Google Sheet named **Activation Menu Wishlist** in a Drive folder. No app-code changes are needed for setup.
+
+Google Cloud creates the private service account, Drive stores the spreadsheet, Vercel holds the credentials, and GitHub stores the app code. Do not put Google credentials in GitHub. This guide covers the wishlist form; the separate Playbook download form uses different Google settings.
 
 ## 1. Create and configure a Google Cloud project
 
 1. In [Google Cloud Console](https://console.cloud.google.com/), create or select a project.
 2. Enable **Google Sheets API** and **Google Drive API** for that project.
-3. Keep the existing Playbook service account for the Playbook route.
+3. If a Playbook service account already exists, leave it unchanged. The wishlist needs its own separate service account.
 4. Create a **separate** service account under **IAM & Admin → Service Accounts** for the wishlist, such as `gatherup-wishlist`.
 5. Copy the wishlist service-account email. It will look like `name@project-id.iam.gserviceaccount.com`.
-6. Create a JSON key for the wishlist service account and download it once. Keep the file in a secure password manager or other restricted secret store. Do not commit it or upload the JSON file to GitHub or Vercel.
+6. Open the account's **Keys** tab, choose **Add key → Create new key → JSON**, and download the file. Keep it in a secure password manager or other restricted secret store. Do not commit it or upload the JSON file to GitHub or Vercel.
 
 The wishlist route uses this dedicated account for Google Sheets and Drive operations. Keeping its key separate avoids expanding the Playbook service account's Drive access. No Google credential belongs in client-side code. See Google's guidance for [service accounts](https://cloud.google.com/iam/docs/service-accounts) and [Drive shared-drive support](https://developers.google.com/workspace/drive/api/guides/about-shareddrives).
 
@@ -36,7 +38,9 @@ Do not share either item publicly. The API needs Sheets write access and Drive m
 - Keep the spreadsheet name `Activation Menu Wishlist` and the folder ID stable. Renaming or moving the spreadsheet outside the configured folder makes it undiscoverable.
 - A non-empty sheet with different headers is not overwritten; the API reports a submission failure for investigation.
 
-## 3. Configure local development
+## 3. Optional: Configure local development (developers only)
+
+Skip this section if you only need to configure the live website. Production settings belong in Vercel in step 4.
 
 Copy the template and set values in the ignored `.env.local` file:
 
@@ -66,21 +70,36 @@ The Playbook integration separately requires `GOOGLE_SHEET_ID` and `GOOGLE_DRIVE
 ## 4. Store production variables in Vercel
 
 1. Open the Vercel project and go to **Settings → Environment Variables**.
-2. Add the Google variables as **server-side environment variables**, not `NEXT_PUBLIC_*` variables:
-   - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-   - `GOOGLE_PRIVATE_KEY`
-   - `GOOGLE_SHEET_ID`
-   - `GOOGLE_DRIVE_FOLDER_ID`
-   - `ACTIVATION_MENU_WISHLIST_SERVICE_ACCOUNT_EMAIL`
-   - `ACTIVATION_MENU_WISHLIST_PRIVATE_KEY`
-   - `ACTIVATION_MENU_WISHLIST_DRIVE_FOLDER_ID`
-   - Optionally, `GOOGLE_SHEET_TAB_NAME` and `ACTIVATION_MENU_WISHLIST_SHEET_TAB_NAME`
-3. Scope the existing Playbook variables to every environment that builds the app (including Preview, if enabled), because the current Next.js config requires them during build. Scope the wishlist service-account credentials and Drive folder ID to **Production**. Add wishlist variables to Preview only if preview deployments should accept submissions; preferably use a separate test Drive folder, spreadsheet, and wishlist service account.
+2. Add these four **server-side** variables. Do not prefix them with `NEXT_PUBLIC_`:
+
+  | Name | Value |
+  |---|---|
+  | `ACTIVATION_MENU_WISHLIST_SERVICE_ACCOUNT_EMAIL` | The `client_email` value from the wishlist service-account JSON key |
+  | `ACTIVATION_MENU_WISHLIST_PRIVATE_KEY` | The `private_key` value from that JSON key |
+  | `ACTIVATION_MENU_WISHLIST_DRIVE_FOLDER_ID` | The folder ID copied from the Drive folder URL |
+  | `ACTIVATION_MENU_WISHLIST_SHEET_TAB_NAME` | Optional. The tab name, usually `Sheet1`; defaults to `Sheet1` if omitted |
+
+3. Set the first three variables for **Production**. Add them to **Preview** only if preview versions of the form should save data; use a separate test folder and spreadsheet for previews.
 4. Save the variables and redeploy so the deployment uses the updated environment.
+
+The Playbook download form has separate variables (`GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_SHEET_ID`, `GOOGLE_SHEET_TAB_NAME`, and `GOOGLE_DRIVE_FOLDER_ID`). Do not use those in place of the wishlist variables. They are only needed if the Playbook form and PDF download are also being configured.
 
 Vercel stores project environment variables encrypted and provides them to the server runtime. See [Vercel environment variables](https://vercel.com/docs/environment-variables). Restrict project/team access to people who are authorized to manage production secrets. Rotate the service-account key in Google Cloud and update Vercel if it is exposed.
 
-## 5. Deploy from GitHub Actions without putting Google keys in GitHub
+## 5. Connect GitHub and Vercel
+
+GitHub stores the app code. Vercel runs the live website and securely stores the Google credentials. This repository does not need a separate GitHub Actions workflow for this integration.
+
+1. In Vercel, open the project and go to **Settings → Git**. Confirm that it is connected to the correct GitHub repository.
+2. Check which Git branch Vercel lists as the **Production Branch**. This branch publishes changes to the live website.
+3. After the Google Drive and Vercel settings are ready, publish the app changes to that branch in GitHub. Vercel should start a deployment automatically. If this repository is not connected yet, use **Add New → Project** in Vercel, choose the GitHub repository, and follow the prompts.
+4. Wait for the deployment in Vercel to show **Ready** before testing the live form.
+
+Never add the service-account email or private key to GitHub files, GitHub repository secrets, source code, or pull requests. The app reads these credentials from Vercel at runtime.
+
+### Advanced and optional: GitHub Actions deployment
+
+Skip this section unless your team specifically requires GitHub Actions to deploy the site. The standard Vercel Git connection in step 5 does not need these steps or GitHub secrets.
 
 There is no GitHub Actions workflow in this repository currently. If you use Actions to deploy, the safest division is:
 
@@ -141,10 +160,10 @@ If you choose a workflow that runs `vercel pull` and builds on the GitHub runner
 
 ## 6. Verify setup
 
-1. Deploy after setting the Vercel variables.
-2. Submit one test wishlist entry from `/activation-menu/wishlist`.
-3. Confirm a spreadsheet named **Activation Menu Wishlist** appears in the configured Drive folder.
-4. Confirm its configured tab contains the twelve header columns and the test row.
-5. Remove the test row or use a dedicated test folder if the submission contains real contact data.
+1. Confirm the Vercel deployment is **Ready**.
+2. Open `/activation-menu/wishlist`, save an activation if desired, and submit a test entry. The form can also be submitted without saved activations.
+3. Confirm the page shows its thank-you message.
+4. Open the configured Drive folder and spreadsheet. The app creates the configured tab and twelve column headers the first time, then adds the test submission as a new row.
+5. Remove the test row if it contains real contact details. Keep the Drive folder private and share it only with people who should access submissions.
 
 If a submission fails, check Vercel function logs for the server-side Google API error. The public response intentionally does not expose credential, permission, or spreadsheet internals.

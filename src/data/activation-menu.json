@@ -14,11 +14,10 @@
         "All-level instruction welcomes beginners and regulars.",
         "Recurring sessions build habit and community over time."
       ],
-      "image": "/assets/activation-menu/yoga-lawn-office-CnEjZC9l.jpg",
       "gallery": [
         {
-          "src": "/assets/activation-menu/hero-yoga-lawn.jpg",
-          "alt": "Group yoga class on a landscaped outdoor lawn"
+          "src": "/assets/activation-menu/yoga-lawn-office-CnEjZC9l.jpg",
+          "alt": "Yoga on the Lawn"
         }
       ],
       "related": [
@@ -43,7 +42,12 @@
         "Low barrier to entry means first-timers participate alongside regulars.",
         "Recurring cadence builds a habit, not a one-and-done activation."
       ],
-      "image": "/assets/activation-menu/rooftop-yoga-skyline-AncOyFU5.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/rooftop-yoga-skyline-AncOyFU5.jpg",
+          "alt": "Rooftop Yoga"
+        }
+      ],
       "related": [
         "yoga-on-the-lawn",
         "stretch-and-sip",
@@ -67,11 +71,10 @@
         "Group energy reduces the intimidation of working out alone.",
         "Variety keeps the calendar fresh and participation high."
       ],
-      "image": "/assets/activation-menu/group-fitness-high-fives-C7ChLmtX.jpg",
       "gallery": [
         {
-          "src": "/assets/images/High Five after Workout_edited.png",
-          "alt": "A fitness instructor and participant celebrating after a workout"
+          "src": "/assets/activation-menu/group-fitness-high-fives-C7ChLmtX.jpg",
+          "alt": "Group fitness classes"
         }
       ],
       "related": [
@@ -97,7 +100,12 @@
         "Low intensity invites people who avoid traditional fitness.",
         "The drink pairing extends the experience and encourages lingering."
       ],
-      "image": "/assets/activation-menu/stretch-sip-lawn-D1VlYz2H.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/stretch-sip-lawn-D1VlYz2H.jpg",
+          "alt": "Stretch & Sip"
+        }
+      ],
       "related": [
         "yoga-on-the-lawn",
         "group-fitness-classes",
@@ -121,7 +129,12 @@
         "Personal attention justifies the amenity in renewal conversations.",
         "Flexible scheduling fits around tenant workdays."
       ],
-      "image": "/assets/activation-menu/personal-training-CFp-i2pe.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/personal-training-CFp-i2pe.jpg",
+          "alt": "Personal Training"
+        }
+      ],
       "related": [
         "group-fitness-classes",
         "fitness-center-orientations",
@@ -145,7 +158,12 @@
         "Creates measurable usage lift in an existing amenity.",
         "Positions the building as attentive and service-forward."
       ],
-      "image": "/assets/activation-menu/office-fitness-center-glqaXph6.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/office-fitness-center-glqaXph6.jpg",
+          "alt": "Fitness Center Orientations"
+        }
+      ],
       "related": [
         "personal-training",
         "group-fitness-classes",
@@ -169,7 +187,12 @@
         "Lobby placement reaches tenants who never book programming.",
         "Cheap to repeat, which is what makes a calendar feel alive."
       ],
-      "image": "/assets/activation-menu/smoothie-social-lobby-CgZgfepV.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/smoothie-social-lobby-CgZgfepV.jpg",
+          "alt": "Smoothie Social"
+        }
+      ],
       "related": [
         "coffee-connection"
       ],
@@ -191,7 +214,12 @@
         "Creates unforced cross-company conversation in the queue.",
         "Highly visible to prospects touring the building."
       ],
-      "image": "/assets/activation-menu/coffee-connection-cart-DDy5dx8m.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/coffee-connection-cart-DDy5dx8m.jpg",
+          "alt": "Coffee + Connection"
+        }
+      ],
       "related": [
         "smoothie-social"
       ],
@@ -213,7 +241,12 @@
         "Treats make the activation feel generous and friendly.",
         "Outdoor setup turns underused property space into a lively amenity moment."
       ],
-      "image": "/assets/activation-menu/put-put-lawn-residential-BItdk9xq.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/put-put-lawn-residential-BItdk9xq.jpg",
+          "alt": "Put-Put & Treats"
+        }
+      ],
       "related": [
         "mutts-and-mocktails",
         "screen-on-the-green"
@@ -236,7 +269,12 @@
         "Mocktails keep the event inclusive and workplace-appropriate.",
         "The after-work timing catches tenants before they head home."
       ],
-      "image": "/assets/activation-menu/mutts-mocktails-lawn-C3I7xGXc.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/mutts-mocktails-lawn-C3I7xGXc.jpg",
+          "alt": "Mutts and Mocktails"
+        }
+      ],
       "related": [
         "put-put-and-popsicles",
         "wine-down-wednesdays"
@@ -259,7 +297,12 @@
         "A hosted tasting feels elevated without requiring a large budget.",
         "Recurring format builds anticipation and regular attendance."
       ],
-      "image": "/assets/activation-menu/wine-down-lobby-bass-C6wdX0jh.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/wine-down-lobby-bass-C6wdX0jh.jpg",
+          "alt": "Wine Down Wednesdays"
+        }
+      ],
       "related": [
         "coffee-connection",
         "mutts-and-mocktails"
@@ -282,7 +325,12 @@
         "Family-friendly format extends the invite beyond the workday.",
         "The event produces shareable moments that reinforce the building's community."
       ],
-      "image": "/assets/activation-menu/screen-on-the-green-lawn-DM9pXrTT.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/screen-on-the-green-lawn-DM9pXrTT.jpg",
+          "alt": "Screen on the Green"
+        }
+      ],
       "related": [
         "put-put-and-popsicles"
       ],
@@ -304,7 +352,12 @@
         "Finished item is personal and immediately useful.",
         "Natural materials reinforce calm and seasonal relevance."
       ],
-      "image": "/assets/activation-menu/botanical-bookmark-flowers-DetCCfKQ.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/botanical-bookmark-flowers-DetCCfKQ.jpg",
+          "alt": "Botanical Bookmark Making"
+        }
+      ],
       "related": [
         "personalized-journals",
         "vision-board-workshop",
@@ -328,7 +381,12 @@
         "Take-home object extends the experience.",
         "Scales well from lobby pop-up to amenity floor takeover."
       ],
-      "image": "/assets/activation-menu/mosaic-bar-bright-tiles-CYpFuhoJ.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/mosaic-bar-bright-tiles-CYpFuhoJ.jpg",
+          "alt": "Mosaic Bar"
+        }
+      ],
       "related": [
         "charm-bar",
         "sip-and-paint"
@@ -351,7 +409,12 @@
         "Compact setup fits almost any common area.",
         "Finished pieces spark conversation back at desks and on social channels."
       ],
-      "image": "/assets/activation-menu/charm-bar-assembly-table-CcSLP5qJ.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/charm-bar-assembly-table-CcSLP5qJ.jpg",
+          "alt": "Charm Bar"
+        }
+      ],
       "related": [
         "mosaic-bar",
         "personalized-journals",
@@ -375,7 +438,12 @@
         "Visual output keeps intentions visible long after the event.",
         "Group format creates gentle accountability and connection."
       ],
-      "image": "/assets/activation-menu/vision-board-conference-room-BpM8ApVx.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/vision-board-conference-room-BpM8ApVx.jpg",
+          "alt": "DIY Vision Board Creation"
+        }
+      ],
       "related": [
         "botanical-bookmark-making"
       ],
@@ -397,7 +465,12 @@
         "Built-in social atmosphere strengthens tenant relationships.",
         "Produces shareable artwork tenants display in their spaces."
       ],
-      "image": "/assets/activation-menu/sip-paint-lobby-CiI7_-Xa.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/sip-paint-lobby-CiI7_-Xa.jpg",
+          "alt": "Sip & Paint"
+        }
+      ],
       "related": [
         "wine-down-wednesdays",
         "mosaic-bar"
@@ -420,7 +493,12 @@
         "Living piece keeps the activation visible for months.",
         "Small-group format encourages natural conversation."
       ],
-      "image": "/assets/activation-menu/micro-terrarium-lobby-D8uH6vKI.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/micro-terrarium-lobby-D8uH6vKI.jpg",
+          "alt": "Micro Terrarium Making"
+        }
+      ],
       "related": [
         "botanical-bookmark-making",
         "personalized-journals",
@@ -444,7 +522,12 @@
         "Creative freedom makes every journal unique.",
         "Pairs naturally with goal-setting and productivity programming."
       ],
-      "image": "/assets/activation-menu/bedazzled-journals-lobby-DEuOe5Bf.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/bedazzled-journals-lobby-DEuOe5Bf.jpg",
+          "alt": "Personalized, Bedazzled Journals"
+        }
+      ],
       "related": [
         "vision-board-workshop"
       ],
@@ -466,7 +549,12 @@
         "Take-home output keeps the activation visible long after the event.",
         "Drop-in format fits any schedule — five minutes or an hour."
       ],
-      "image": "/assets/activation-menu/pumpkin-decorating-BP7dxiot.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/pumpkin-decorating-BP7dxiot.jpg",
+          "alt": "Pumpkin Decorating"
+        }
+      ],
       "related": [
         "diy-centerpiece-making",
         "gratitude-walls",
@@ -490,7 +578,12 @@
         "A usable, giftable take-home extends the experience for weeks.",
         "Recipe cards give hesitant cooks an easy on-ramp."
       ],
-      "image": "/assets/activation-menu/diy-savory-spice-bar-DHtINp1I.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/diy-savory-spice-bar-DHtINp1I.jpg",
+          "alt": "DIY Savory Spice Bar"
+        }
+      ],
       "related": [
         "diy-centerpiece-making"
       ],
@@ -512,7 +605,12 @@
         "The growing wall becomes a daily visual moment in the lobby.",
         "Gratitude content is warm, inclusive, and photographable for the community story."
       ],
-      "image": "/assets/activation-menu/gratitude-walls-tMj9RiAM.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/gratitude-walls-tMj9RiAM.jpg",
+          "alt": "Gratitude Walls"
+        }
+      ],
       "related": [
         "pumpkin-decorating",
         "diy-centerpiece-making"
@@ -535,7 +633,12 @@
         "The finished centerpiece is genuinely useful heading into the holidays.",
         "Working side by side with flowers creates easy, natural conversation."
       ],
-      "image": "/assets/activation-menu/diy-centerpiece-making-Co_opET-.jpg",
+      "gallery": [
+        {
+          "src": "/assets/activation-menu/diy-centerpiece-making-Co_opET-.jpg",
+          "alt": "DIY Centerpiece Making"
+        }
+      ],
       "related": [
         "pumpkin-decorating",
         "micro-terrarium-making",

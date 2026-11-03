@@ -22,8 +22,8 @@ export function ActivationCard({
     <article className="am-card">
       <div className="am-card__image">
         <Image
-          src={activation.image}
-          alt={activation.name}
+          src={activation.gallery[0].src}
+          alt={activation.gallery[0].alt}
           fill
           sizes="(max-width: 359px) 100vw, (max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
         />

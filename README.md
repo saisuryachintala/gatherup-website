@@ -57,7 +57,7 @@ cp .env.example .env.local
 6. Copy `.env.example` to `.env.local` and fill in the values
 7. Add the server variables to Vercel: **Project Settings > Environment Variables**
 
-For detailed setup—including Drive permissions, manual spreadsheet creation, local credentials, and secure GitHub Actions-to-Vercel deployment—see [Activation Menu Wishlist Google setup](./docs/activation-menu-wishlist-setup.md).
+For step-by-step setup of the wishlist form's Google Cloud service account, Drive folder, Vercel settings, GitHub connection, and test submission, see [Activation Menu Wishlist setup](./docs/activation-menu-wishlist-setup.md).
 
 ### Variables
 
@@ -115,4 +115,4 @@ The wishlist API requires `ACTIVATION_MENU_WISHLIST_DRIVE_FOLDER_ID` and the Goo
 
 ## Deployment
 
-Deployed via Vercel. Environment variables must be configured in Vercel project settings. For a GitHub Actions deployment setup that keeps Google credentials out of GitHub, see [Activation Menu Wishlist Google setup](./docs/activation-menu-wishlist-setup.md#5-deploy-from-github-actions-without-putting-google-keys-in-github).
+Deployed via Vercel. For the standard deployment, connect the GitHub repository under Vercel **Project Settings → Git** and keep Google credentials in Vercel project environment variables, not GitHub. See [Activation Menu Wishlist setup](./docs/activation-menu-wishlist-setup.md).

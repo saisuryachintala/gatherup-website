@@ -6,10 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Activation } from "@/data/activation-menu";
 
 export function ActivationImageCarousel({ activation }: { activation: Activation }) {
-  const images = [
-    { src: activation.image, alt: activation.name },
-    ...(activation.gallery ?? []),
-  ];
+  const images = activation.gallery;
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
 

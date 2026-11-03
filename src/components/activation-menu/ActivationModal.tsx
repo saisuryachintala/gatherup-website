@@ -66,7 +66,7 @@ export function ActivationModal({
     ? navigableActivations[(currentIndex + 1) % navigableActivations.length]
     : undefined;
   const adjacentImageSources = useMemo(
-    () => [previous, next].flatMap((item) => item ? [item.image, ...(item.gallery ?? []).map((image) => image.src)] : []),
+    () => [previous, next].flatMap((item) => item ? item.gallery.map((image) => image.src) : []),
     [next, previous],
   );
   const closeModal = useCallback(() => {

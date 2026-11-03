@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
                         <div className="col-span-1 md:col-span-2">
                             <div className="relative w-52 h-16 md:w-72 md:h-24 lg:w-80 lg:h-28 mb-4">
                                 <Image
-                                    src="/assets/GatherUp-Lockups/SVG/Lockups_Full_Logo_Slogan_FullBrandColor.svg"
+                                    src="/assets/GatherUp-Lockups/SVG/GatherUp_Extended Logo_Fresh Green_Without BG.svg"
                                     alt="GatherUp Experiences"
                                     fill
                                     className="object-contain"

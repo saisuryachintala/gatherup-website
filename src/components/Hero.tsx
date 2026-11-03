@@ -58,7 +58,7 @@ export const Hero: React.FC = () => {
                         className="w-full text-3xl sm:text-4xl sm:mt-4 mt-12 md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-lg"
                         style={{ fontFamily: 'Montserrat', fontSize: '50px', fontWeight: '700', lineHeight: '1.1em', letterSpacing: '0em' }}
                     >
-                        Experiences that transforms properties.
+                        Experiences that transform properties.
                     </motion.h1>
 
                     <motion.div variants={fadeInUp}>

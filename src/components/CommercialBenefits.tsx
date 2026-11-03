@@ -23,7 +23,7 @@ export const CommercialBenefits: React.FC = () => {
                         className="text-lg md:text-xl text-center leading-relaxed max-w-4xl mx-auto text-white pt-10 pb-10"
                     >
                         GatherUp partners with owners, asset managers, and
-                        property teams to design wellness-driven tenant experiences that support:
+                        property teams to design tenant experiences that support:
                     </motion.p>
                     <motion.div
                         className="px-2 md:px-4 grid md:grid-cols-3 gap-8 md:gap-12"
@@ -68,7 +68,7 @@ export const CommercialBenefits: React.FC = () => {
                             </div>
                             <h3 className="text-xl md:text-2xl font-bold mb-3 text-[#a6ff48]">Amenity ROI</h3>
                             <p className="text-base md:text-lg leading-relaxed">
-                                We help you move from "nice gym and empty lounge" to activated spaces with regular programming, community moments, and measurable engagement.
+                                We help you move from &ldquo;nice gym and empty lounge&rdquo; to activated spaces with regular programming, community moments, and measurable engagement.
                             </p>
                         </motion.div>
                     </motion.div>

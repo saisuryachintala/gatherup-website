@@ -68,13 +68,15 @@ export const ResidentialCaseStudy: React.FC = () => {
         setCurrentIndex(index);
     };
 
-    // Auto-play functionality (optional - uncomment if desired)
+    // Auto-play functionality
     useEffect(() => {
         const interval = setInterval(() => {
-            goToNext();
+            setCurrentIndex((prevIndex) =>
+                prevIndex === images.length - 1 ? 0 : prevIndex + 1
+            );
         }, 3000);
         return () => clearInterval(interval);
-    }, [currentIndex]);
+    }, [images.length]);
 
     return (
         <section className="py-8 md:py-16 bg-[#F5FAF5]">
@@ -156,7 +158,7 @@ export const ResidentialCaseStudy: React.FC = () => {
                             <br className="md:hidden" />
                             <span className="md:inline text-[#053d3d] font-bold text-2xl md:text-xl"> 320-Unit Urban Mid-Rise</span>
                             <p className="text-[#053d3d] text-lg mb-4">
-                                "From Transient to Connected"
+                                &ldquo;From Transient to Connected&rdquo;
                             </p>
                         </div>
 
@@ -249,7 +251,7 @@ export const ResidentialCaseStudy: React.FC = () => {
                     </div>
 
                     <p className="text-[#053d3d] text-base text-center leading-relaxed max-w-4xl mx-auto">
-                        More residents reported <span className="font-bold">"I know at least 3 neighbors by name"</span> and <span className="font-bold">"I feel a sense of community here"</span> on follow-up surveys.
+                        More residents reported <span className="font-bold">&ldquo;I know at least 3 neighbors by name&rdquo;</span> and <span className="font-bold">&ldquo;I feel a sense of community here&rdquo;</span> on follow-up surveys.
                         This is the kind of community and retention shift we aim to achieve with a focused, manageable program.
                     </p>
                 </div>

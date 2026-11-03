@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 export const ValueProp: React.FC = () => {
     return (
@@ -19,7 +18,7 @@ export const ValueProp: React.FC = () => {
                         <h2 className="text-4xl font-bold text-primary">Why You Need GatherUp</h2>
                         <div className="w-20 h-1 bg-accent rounded-full"></div>
                         <p className="text-lg text-gray-600 leading-relaxed">
-                            In today's fast-paced world, workplace well-being is more than just a perk—it's a necessity.
+                            In today&apos;s fast-paced world, workplace well-being is more than just a perk—it&apos;s a necessity.
                             GatherUp provides the tools and community needed to reduce burnout, improve mental health,
                             and foster genuine connections among your team members.
                         </p>

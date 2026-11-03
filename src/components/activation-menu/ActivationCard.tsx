@@ -1,0 +1,66 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Heart } from "lucide-react";
+import type { Activation, ActivationMenuView } from "@/data/activation-menu";
+import { useWishlist } from "./WishlistProvider";
+
+export function ActivationCard({
+  activation,
+  view = "All",
+  onOpen,
+}: {
+  activation: Activation;
+  view?: ActivationMenuView;
+  onOpen?: () => void;
+}) {
+  const { isSaved, toggleSaved } = useWishlist();
+  const saved = isSaved(activation.slug);
+
+  return (
+    <article className="am-card">
+      <div className="am-card__image">
+        <Image
+          src={activation.gallery[0].src}
+          alt={activation.gallery[0].alt}
+          fill
+          sizes="(max-width: 359px) 100vw, (max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+        />
+        <button
+          className={`am-save-button${saved ? " is-saved" : ""}`}
+          type="button"
+          aria-label={`${saved ? "Remove" : "Save"} ${activation.name} ${saved ? "from" : "to"} wishlist`}
+          aria-pressed={saved}
+          onClick={() => toggleSaved(activation.slug)}
+        >
+          <Heart aria-hidden="true" size={21} fill={saved ? "currentColor" : "none"} />
+        </button>
+      </div>
+
+      <div className="am-card__content">
+        <p className="am-eyebrow">{activation.category}</p>
+        <h2>{activation.name}</h2>
+        <p className="am-card__description">{activation.shortDescription}</p>
+      </div>
+      {onOpen ? (
+        <button
+          className="am-card__overlay-link"
+          type="button"
+          aria-label={`View ${activation.name}`}
+          onClick={onOpen}
+        >
+          <span className="sr-only">View {activation.name}</span>
+        </button>
+      ) : (
+        <Link
+          href={`/activation-menu/activations/${activation.slug}?view=${encodeURIComponent(view)}`}
+          className="am-card__overlay-link"
+          aria-label={`View ${activation.name}`}
+        >
+          <span className="sr-only">View {activation.name}</span>
+        </Link>
+      )}
+    </article>
+  );
+}

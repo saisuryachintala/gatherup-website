@@ -56,7 +56,7 @@ export const TenantStatsOption1: React.FC = () => {
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                 >
-                    The Impact of Tenant Wellness
+                    The Impact of Tenant Engagement
                 </motion.h2>
 
                 <motion.div

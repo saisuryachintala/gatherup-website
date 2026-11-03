@@ -40,7 +40,7 @@ export const WhyGatherUp: React.FC = () => {
                 initial="hidden"
                 animate={headerInView ? "visible" : "hidden"}
             >
-                <p className="text-4xl md:text-5xl font-bold text-white font-display">
+                <p className="text-4xl md:text-5xl font-bold text-[#e0f2cc] font-display">
                     Happier Tenants,
                 </p>
                 <p className="pt-4 text-4xl md:text-5xl font-bold text-[#a6ff48]">Better Business Outcomes</p>
@@ -63,14 +63,14 @@ export const WhyGatherUp: React.FC = () => {
                             </h3>
                             <div className="text-lg space-y-4 text-gray-700 leading-relaxed">
                                 <p>
-                                    Most property teams know that wellness matters, but few have the time, data, or expertise to turn it into a measurable strategy.
+                                    Most property teams know that onsite experiences matter, but few have the time, data, or expertise to create a measurable strategy.
                                 </p>
                                 <div className="h-0.25 w-64 md:w-128 bg-[#053d3d]/40 rounded-full mb-6 mx-auto"></div>
                                 <p>
-                                    <span className="italic">That's where we come in.</span>
+                                    <span className="italic">That&apos;s where we come in.</span>
                                 </p>
                                 <p>
-                                    GatherUp designs and delivers wellness programming that drives engagement, boosts retention, and improves property performance.
+                                    GatherUp designs and delivers programming that drives engagement, boosts retention, and improves property performance.
                                 </p>
                             </div>
                         </motion.div>

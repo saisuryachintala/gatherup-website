@@ -45,10 +45,10 @@ export const AtGatherUp: React.FC = () => {
                             ))}
                         </div>
                         <p className="text-lg font-semibold text-white leading-relaxed">
-                            This isn't feel-good programming.
+                            This isn&apos;t feel-good programming.
                         </p>
                         <p className="text-lg font-semibold text-white leading-relaxed">
-                            It's a property strategy executed on-site.
+                            It&apos;s a property strategy executed on-site.
                         </p>
                     </motion.div>
 

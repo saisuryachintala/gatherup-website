@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { scrollReveal, imageLoad } from '@/utils/animations';
@@ -79,39 +79,33 @@ export const Testimonial: React.FC<TestimonialProps> = ({
     // Duplicate items for infinite scroll
     const duplicatedItems = [...items, ...items];
 
-    const pauseAndResumeAutoplay = useCallback(() => {
-        // Pause on interaction and resume after the configured interval
+    const pauseAndResumeAutoplay = () => {
         setIsAutoPlaying(false);
         setTimeout(() => setIsAutoPlaying(true), autoPlayInterval);
-    }, [autoPlayInterval]);
+    };
 
-    const nextSlide = useCallback(() => {
+    const nextSlide = () => {
         setCurrentIndex((prevIndex) => {
             const nextIndex = prevIndex + 1;
-            // When we reach the duplicate first item (items.length), show it seamlessly
             if (nextIndex === items.length) {
-                // After transition completes, reset to 0 without animation
                 setTimeout(() => {
                     setIsTransitioning(false);
                     setCurrentIndex(0);
                     setTimeout(() => setIsTransitioning(true), 50);
                 }, 1000);
-                return items.length; // Show duplicate first item (seamless from last original)
+                return items.length;
             }
-            // Normal progression
             if (nextIndex < items.length) {
                 return nextIndex;
             }
-            // Shouldn't reach here, but safety fallback
             return prevIndex;
         });
         pauseAndResumeAutoplay();
-    }, [items.length, pauseAndResumeAutoplay]);
+    };
 
-    const prevSlide = useCallback(() => {
+    const prevSlide = () => {
         setCurrentIndex((prevIndex) => {
             if (prevIndex === 0) {
-                // Jump to duplicate last item (without animation)
                 setIsTransitioning(false);
                 const newIndex = items.length * 2 - 1;
                 setTimeout(() => {
@@ -123,7 +117,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
             return prevIndex - 1;
         });
         pauseAndResumeAutoplay();
-    }, [items.length, pauseAndResumeAutoplay]);
+    };
 
     const goToSlide = (index: number) => {
         // Ensure we're using the original items index (not duplicated)
@@ -135,9 +129,25 @@ export const Testimonial: React.FC<TestimonialProps> = ({
     useEffect(() => {
         if (!isAutoPlaying || items.length <= 1) return;
 
-        const interval = setInterval(nextSlide, autoPlayInterval);
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => {
+                const nextIndex = prevIndex + 1;
+                if (nextIndex === items.length) {
+                    setTimeout(() => {
+                        setIsTransitioning(false);
+                        setCurrentIndex(0);
+                        setTimeout(() => setIsTransitioning(true), 50);
+                    }, 1000);
+                    return items.length;
+                }
+                if (nextIndex < items.length) {
+                    return nextIndex;
+                }
+                return prevIndex;
+            });
+        }, autoPlayInterval);
         return () => clearInterval(interval);
-    }, [isAutoPlaying, nextSlide, autoPlayInterval, items.length]);
+    }, [isAutoPlaying, autoPlayInterval, items.length]);
 
     // Swipe handlers
     const handleTouchStart = (e: React.TouchEvent) => {
@@ -201,12 +211,11 @@ export const Testimonial: React.FC<TestimonialProps> = ({
             }
         );
 
-        observer.observe(sectionRef.current);
+        const currentRef = sectionRef.current;
+        observer.observe(currentRef);
 
         return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
+            observer.unobserve(currentRef);
         };
     }, [isHovering]);
 
@@ -358,7 +367,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
                                                     {testimonial.authorTitle}
                                                 </p>
                                                 <blockquote className="text-white text-base md:text-xl leading-relaxed italic">
-                                                    "{testimonial.quote}"
+                                                    &ldquo;{testimonial.quote}&rdquo;
                                                 </blockquote>
                                             </div>
                                         </div>

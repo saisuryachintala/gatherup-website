@@ -9,7 +9,6 @@ import { WhatsAtStake } from '@/components/WhatsAtStake';
 import { BusinessImpact } from '@/components/BusinessImpact';
 import { BeyondPerks } from '@/components/BeyondPerks';
 import { AtGatherUp } from '@/components/AtGatherUp';
-import { BlogPreview } from '@/components/BlogPreview';
 import { CTASection } from '@/components/CTASection';
 import { pageLoad } from '@/utils/animations';
 import { TenantStatsOption1 } from "@/components/TenantStatsOption1";
@@ -19,7 +18,7 @@ export default function WhyItMatters() {
         <motion.main
             className="min-h-screen bg-white overflow-x-hidden"
             variants={pageLoad}
-            initial="hidden"
+            initial={false}
             animate="visible"
         >
             <Header />

@@ -26,13 +26,13 @@ export const ResidentialNOI: React.FC = () => {
                     >
                         <h2 className="text-3xl md:text-4xl font-bold text-[#a6ff48] mb-4 font-display">The GatherUp Impact</h2>
                         <p className="text-lg text-white mb-4">
-                            GatherUp creates a positive impact cycle that starts with people and ends with performance. By activating wellness-focused experiences and meaningful community moments, residents feel more connected, supported, and satisfied in their living environment.
+                            GatherUp creates a positive impact cycle that starts with people and ends with performance. By activating onsite experiences and meaningful community moments, residents feel more connected, supported, and satisfied in their living environment.
                         </p>
                         <p className="text-lg text-white mb-4">
                             When residents are happier and more connected, renewals increase, turnover drops, and vacancy friction decreases. The result is a healthier NOI through intentional experiences that turn everyday living into a reason to stay.
                         </p>
                         <p className="text-xl text-[#a6ff48] font-bold mb-4 mt-4">
-                            GatherUp helps properties turn resident well-being into a measurable business advantage.
+                            GatherUp helps properties turn resident engagement into a measurable business advantage.
                         </p>
                     </motion.div>
 

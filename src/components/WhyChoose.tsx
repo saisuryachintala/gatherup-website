@@ -11,7 +11,7 @@ export const WhyChoose: React.FC = () => {
             icon: "/assets/icons/New Icon Set/Tailored Solutions.svg",
             iconSize: "w-12 h-12",
             title: "Tailored Solutions",
-            description: "GatherUp builds connection-centered wellness programs designed for your property's tenants, culture, and goals. Every activation is shaped around the people who live or work in your building."
+            description: "GatherUp builds connection-centered programs designed for your property's tenants, culture, and goals. Every activation is shaped around the people who live or work in your building."
         },
         {
             icon: "/assets/icons/New Icon Set/Efficiency.svg",

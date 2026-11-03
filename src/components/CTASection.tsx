@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { BookDemoButton } from './BookDemoButton';
+import { ViewActivationMenuButton } from './ViewActivationMenuButton';
 import { scrollReveal, staggerContainer } from '@/utils/animations';
 
 interface CTASectionProps {
@@ -15,8 +16,6 @@ interface CTASectionProps {
 export const CTASection: React.FC<CTASectionProps> = ({
     title = "Ready to turn tenant experience into a property advantage?",
     subtitle = "Let's activate your spaces and your results.",
-    buttonText = "Book a Demo",
-    buttonLink = "https://tidycal.com/gluckjamin/free-gatherup-consultation"
 }) => {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
@@ -43,7 +42,8 @@ export const CTASection: React.FC<CTASectionProps> = ({
                         {subtitle}
                     </motion.p>
                     <motion.div variants={scrollReveal}>
-                        <BookDemoButton />
+                        {/* <BookDemoButton /> */}
+                        <ViewActivationMenuButton />
                     </motion.div>
                 </motion.div>
             </div>

@@ -38,13 +38,13 @@ export const WhatsAtStake: React.FC = () => {
                         variants={scrollReveal}
                         className="text-3xl font-bold text-[#a6ff48] font-display mb-4"
                     >
-                        What's at stake?
+                        What&apos;s at stake?
                     </motion.h2>
                     <motion.p
                         variants={scrollReveal}
                         className="text-lg text-white leading-relaxed mb-8"
                     >
-                        Property well-being is the antidote to disengagement, turnover, and culture.
+                        Engagement is the antidote to disengagement, turnover, and culture.
                     </motion.p>
                     {/* White separator line */}
                     <motion.div

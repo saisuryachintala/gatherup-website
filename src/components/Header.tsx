@@ -251,7 +251,7 @@ export const Header: React.FC = () => {
                                 {openDropdown === 'activation' && (
                                     <div
                                         id="activation-menu-dropdown"
-                                        className="absolute left-0 top-full z-50 w-72 pt-2"
+                                        className="absolute left-0 top-full z-50 w-60 pt-2"
                                     >
                                         <div className="rounded-lg border border-[#a6ff48]/30 bg-[#053d3d] py-2 shadow-lg">
                                             <Link

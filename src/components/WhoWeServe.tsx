@@ -60,7 +60,7 @@ export const WhoWeServe: React.FC = () => {
                         variants={scrollReveal}
                         className="text-center text-lg mb-4 text-[#F5FAF5]"
                     >
-                        Our wellness-driven programs are designed specifically for:
+                        Our programs are designed specifically for:
                     </motion.p>
 
                     {/* Property Types Grid */}

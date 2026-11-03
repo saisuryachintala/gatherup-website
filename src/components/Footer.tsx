@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
                                 GatherUp partners with property leaders to turn tenant experiences into measurable property performance.
                             </p>
                             <p className="text-white text-lg max-w-md mb-6">
-                                Through strategic amenity activation and community-led well-being programming, we help properties increase tenant satisfaction, strengthen retention, and support long-term NOI.
+                                Through strategic amenity activation and community-focussed programming, we help properties increase tenant satisfaction, strengthen retention, and support long-term NOI.
                             </p>
 
                             {/* Follow Us */}

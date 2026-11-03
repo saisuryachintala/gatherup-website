@@ -63,7 +63,7 @@ export const WhyGatherUp: React.FC = () => {
                             </h3>
                             <div className="text-lg space-y-4 text-gray-700 leading-relaxed">
                                 <p>
-                                    Most property teams know that onsite experiences matters, but few have the time, data, or expertise to turn it into a measurable strategy.
+                                    Most property teams know that onsite experiences matter, but few have the time, data, or expertise to create a measurable strategy.
                                 </p>
                                 <div className="h-0.25 w-64 md:w-128 bg-[#053d3d]/40 rounded-full mb-6 mx-auto"></div>
                                 <p>

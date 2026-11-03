@@ -12,7 +12,7 @@ export default function ActivationMenuHome() {
           <h1>Unique experiences that delight your tenants and add value to your property.</h1>
           <p className="am-hero__description py-4">
             A curated menu of activations for commercial, residential and mixed use properties. Browse the
-            full menu, save the ideas that stand out, and our team will help you bring the vision to life.
+            full menu, save the ideas that stand out, and our team will help you bring your vision to life.
           </p>
           <Link className="am-primary-button" href="#catalog">
             Explore Activations

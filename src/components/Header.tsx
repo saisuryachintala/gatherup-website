@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BookDemoButton } from './BookDemoButton';
+import { ViewActivationMenuButton } from './ViewActivationMenuButton';
 import { ChevronDown, Heart } from 'lucide-react';
-import { FAQ_PAGES } from '@/data/activation-menu-faq';
 import { useWishlist } from '@/components/activation-menu/WishlistProvider';
 
 export const Header: React.FC = () => {
@@ -358,9 +358,10 @@ export const Header: React.FC = () => {
                         </button>
                     </div>
 
-                    {/* Book a Demo Button - Outside constrained container */}
+                    {/* ViewActivationMenuButton - Outside constrained container */}
                     <div className="hidden lg:flex flex-shrink-0">
-                        <BookDemoButton />
+                        {/* <BookDemoButton /> */}
+                        <ViewActivationMenuButton />
                     </div>
                 </div>
                 <div className="border-t border-[#a6ff48] w-full" />
